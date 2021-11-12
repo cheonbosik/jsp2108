@@ -152,6 +152,10 @@
 			</div>
     </div>
     <div class="form-group">
+      <label for="content">자기소개</label>
+      <textarea rows="5" class="form-control" id="content" name="content"></textarea>
+    </div>
+    <div class="form-group">
       <div class="form-check-inline">
         <span class="input-group-text">정보공개</span>  &nbsp; &nbsp; 
 			  <label class="form-check-label">
