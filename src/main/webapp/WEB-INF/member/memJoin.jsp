@@ -7,6 +7,9 @@
   <title>title</title>
   <%@ include file="../../include/bs4.jsp" %>
   <script>
+  	var idCheckOn = 0;
+  	var nickCheckOn = 0;
+  
   	// 아이디 중복체크
     function idCheck() {
     	var mid = myform.mid.value;
@@ -17,6 +20,7 @@
     		myform.mid.focus();
     	}
     	else {
+    		idCheckOn = 1;
     		window.open(url,"nWin","width=500px,height=250px");
     	}
     }
@@ -31,13 +35,62 @@
     		myform.nickName.focus();
     	}
     	else {
+    		nickCheckOn = 1;
     		window.open(url,"nWin","width=500px,height=250px");
     	}
     }
+  	
+  	function idReset() {
+  		idCheckOn = 0;
+  	}
+  	
+  	function nickReset() {
+  		nickCheckOn = 0;
+  	}
     
   	// 회원가입폼 체크
     function fCheck() {
+    	var mid = myform.mid.value;
+    	var pwd = myform.pwd.value;
+    	var nickName = myform.nickName.value;
+    	var name = myform.name.value;
+    	var email1 = myform.email1.value;
     	
+    	if(mid == "") {
+    		alert("아이디를 입력하세요");
+    		myform.mid.focus();
+    	}
+    	else if(pwd == "") {
+    		alert("비밀번호를 입력하세요");
+    		myform.pwd.focus();
+    	}
+    	else if(nickName == "") {
+    		alert("닉네임을 입력하세요");
+    		myform.nickName.focus();
+    	}
+    	else if(name == "") {
+    		alert("성명을 입력하세요");
+    		myform.name.focus();
+    	}
+    	else if(email1 == "") {
+    		alert("이메일을 입력하세요");
+    		myform.email1.focus();
+    	}
+    	// 기타 추가 체크해야 할 항목들을 모두 체크하세요.
+    	else {
+    		if(idCheckOn == 1 && nickCheckOn == 1) {
+    			alert("입력처리 되었습니다.!");
+    			//myform.submit();
+    		}
+    		else {
+    			if(idCheckOn == 0) {
+    				alert("아이디 중복체크버튼을 눌러주세요!");
+    			}
+    			else {
+    				alert("닉네임, 중복체크버튼을 눌러주세요!");
+    			}
+    		}
+    	}
     }
   </script>
 </head>
@@ -50,7 +103,7 @@
     <br/>
     <div class="form-group">
       <label for="mid">아이디 : &nbsp; &nbsp;<input type="button" value="아이디 중복체크" class="btn btn-secondary" onclick="idCheck()"/></label>
-      <input type="text" class="form-control" id="mid" placeholder="아이디를 입력하세요." name="mid" required autofocus/>
+      <input type="text" class="form-control" id="mid" onkeyup="idReset()" placeholder="아이디를 입력하세요." name="mid" required autofocus/>
     </div>
     <div class="form-group">
       <label for="pwd">비밀번호 :</label>
@@ -58,7 +111,7 @@
     </div>
     <div class="form-group">
       <label for="nickname">닉네임 : &nbsp; &nbsp;<input type="button" value="닉네임 중복체크" class="btn btn-secondary" onclick="nickCheck()"/></label>
-      <input type="text" class="form-control" id="nickName" placeholder="별명을 입력하세요." name="nickName" required/>
+      <input type="text" class="form-control" id="nickName" onkeyup="nickReset()"  placeholder="별명을 입력하세요." name="nickName" required/>
     </div>
     <div class="form-group">
       <label for="name">성명 :</label>
