@@ -24,6 +24,9 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/password">비밀번호암호화</a>
 		    </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath()%>/memLogin.mem">Login</a>
+      </li>
     </ul>
   </div>  
 </nav>

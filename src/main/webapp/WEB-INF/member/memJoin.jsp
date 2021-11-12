@@ -6,17 +6,50 @@
   <meta charset="UTF-8">
   <title>title</title>
   <%@ include file="../../include/bs4.jsp" %>
+  <script>
+  	// 아이디 중복체크
+    function idCheck() {
+    	var mid = myform.mid.value;
+    	var url = "<%=request.getContextPath()%>/idCheck.mem?mid="+mid;
+    	
+    	if(mid=="") {
+    		alert("아이디를 입력하세요!");
+    		myform.mid.focus();
+    	}
+    	else {
+    		window.open(url,"nWin","width=500px,height=250px");
+    	}
+    }
+    
+  	// 닉네임 중복체크
+    function nickCheck() {
+    	var nickName = myform.nickName.value;
+    	var url = "<%=request.getContextPath()%>/nickCheck.mem?nickName="+nickName;
+    	
+    	if(nickName=="") {
+    		alert("닉네임을 입력하세요!");
+    		myform.nickName.focus();
+    	}
+    	else {
+    		window.open(url,"nWin","width=500px,height=250px");
+    	}
+    }
+    
+  	// 회원가입폼 체크
+    function fCheck() {
+    	
+    }
+  </script>
 </head>
 <body>
 <%@ include file="../../include/header_home.jsp" %>
 <%@ include file="../../include/nav.jsp" %>
-<p><br></p>
-<div class="container">
+<div class="container" style="padding:30px">
   <form name="myform" method="post" action="" class="was-validated">
     <h2>회 원 가 입</h2>
     <br/>
     <div class="form-group">
-      <label for="mid">아이디 : &nbsp; &nbsp;<input type="button" value="아이디 중복체크" class="btn btn-secondary" onclick=""/></label>
+      <label for="mid">아이디 : &nbsp; &nbsp;<input type="button" value="아이디 중복체크" class="btn btn-secondary" onclick="idCheck()"/></label>
       <input type="text" class="form-control" id="mid" placeholder="아이디를 입력하세요." name="mid" required autofocus/>
     </div>
     <div class="form-group">
@@ -24,7 +57,7 @@
       <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요." name="pwd" maxlength="9" required/>
     </div>
     <div class="form-group">
-      <label for="nickname">닉네임 : &nbsp; &nbsp;<input type="button" value="닉네임 중복체크" class="btn btn-secondary" onclick=""/></label>
+      <label for="nickname">닉네임 : &nbsp; &nbsp;<input type="button" value="닉네임 중복체크" class="btn btn-secondary" onclick="nickCheck()"/></label>
       <input type="text" class="form-control" id="nickName" placeholder="별명을 입력하세요." name="nickName" required/>
     </div>
     <div class="form-group">
@@ -170,7 +203,7 @@
     </div>
     <button type="button" class="btn btn-secondary" onclick="fCheck()">회원가입</button>
     <button type="reset" class="btn btn-secondary">다시작성</button>
-    <button type="button" class="btn btn-secondary" onclick="location.href='';">돌아가기</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/memLogin.mem';">돌아가기</button>
   </form>
   <p><br/></p>
 </div>
