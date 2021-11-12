@@ -1,0 +1,23 @@
+※ 회원가입 :
+- 데이터베이스 : javacource
+- 테이블명 : member.sql
+- 테이블 설계 : member.sql
+
+- 작업폴더/패키지 명 : member
+
+- 클래스파일(실행 Logic) - 서비스객체, DB컨트롤객체(VO(DTO),DAO)
+    1) vo : MemberVO.java
+    2) dao : MemberDAO.java
+    3) Controller : (*.mem)
+        MemController.java
+
+
+- View 파일
+  1) 로그인파일 : memLogin.jsp
+  2) 회원가입 : memJoin.jsp
+  3) 로그인메인화면 : memMain.jsp
+  4) 회원관리 :
+     - 회원정보수정 : memUpdate.jsp
+     - 회원탈퇴 : memDelete.jsp
+
+

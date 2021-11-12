@@ -21,7 +21,7 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping">URL(디렉토리)매핑</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping.url">URL(확장자)매핑</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping.url2">URL(확장자)매핑2</a>
-		      <a class="dropdown-item" href="#">Link 3</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/password">비밀번호암호화</a>
 		    </div>
       </li>
     </ul>
