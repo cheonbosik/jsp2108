@@ -79,8 +79,8 @@
     	// 기타 추가 체크해야 할 항목들을 모두 체크하세요.
     	else {
     		if(idCheckOn == 1 && nickCheckOn == 1) {
-    			alert("입력처리 되었습니다.!");
-    			//myform.submit();
+    			//alert("입력처리 되었습니다.!");
+    			myform.submit();
     		}
     		else {
     			if(idCheckOn == 0) {
@@ -98,7 +98,7 @@
 <%@ include file="../../include/header_home.jsp" %>
 <%@ include file="../../include/nav.jsp" %>
 <div class="container" style="padding:30px">
-  <form name="myform" method="post" action="" class="was-validated">
+  <form name="myform" method="post" action="<%=request.getContextPath()%>/memJoinOk.mem" class="was-validated">
     <h2>회 원 가 입</h2>
     <br/>
     <div class="form-group">
