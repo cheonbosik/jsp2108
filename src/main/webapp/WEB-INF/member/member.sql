@@ -24,13 +24,16 @@ create table member (
 	visitCnt	int default 0,						/* 방문횟수 */
 	startDate datetime default now(),		/* 최초 가입일 */
 	lastDate  datetime default now(),		/* 마지막 접속일 */
+	todayCnt  int default 0,						/* 오늘 방문한 횟수 */
 	primary key(idx, mid)								/* 키본키 : 고유번호, 아이디 */
 );
 
 /* drop table member; */
 desc member;
 
-insert into member values (default,'admin','1234',1,'관리맨','관리자',default,default,'010-3423-2704','경기도 안성시','cjsk1126@naver.com','blog.daum.net/cjsk1126','프리랜서','등산/바둑',default,'관리자입니다.',default,default,default,default,default,default,default);
+alter table member add column todayCnt int default 0;
+
+insert into member values (default,'admin','1234',1,'관리맨','관리자',default,default,'010-3423-2704','경기도 안성시','cjsk1126@naver.com','blog.daum.net/cjsk1126','프리랜서','등산/바둑',default,'관리자입니다.',default,default,default,default,default,default,default,default);
 
 update member set level = 0 where mid = 'admin';
 update member set pwd = '127420962', pwdKey=15, tel='010/3423/2704', address='경기도 안성시///' where mid = 'admin';

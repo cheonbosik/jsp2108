@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class MemLoginOkCommand implements MemberInterface {
 
@@ -31,7 +32,17 @@ public class MemLoginOkCommand implements MemberInterface {
 				result += ch;
 			}
 			
-			if(pwd.equals(result)) {  // 비밀번호 인증 OK!
+			HttpSession session = request.getSession();
+			if(pwd.equals(result)) {  // 비밀번호 인증 OK!(정상 로그인 되었을때 처리부분)
+				session.setAttribute("sMid", mid);
+				session.setAttribute("sNickName", vo.getNickName());
+				session.setAttribute("sLevel", vo.getLevel());
+				
+				session.setAttribute("sLastDate", vo.getLastDate().substring(0, vo.getLastDate().lastIndexOf(".")));  // 최종 접속일 알아오기
+				session.setAttribute("sPoint", vo.getPoint());				// 고개의 현재 총 포인트
+				
+				dao.setLastDateUpdate(mid);  // 신규 로그인시 수정항목(포인트, 방문수,등등..) 처리
+				
 			  request.setAttribute("msg", "memberLoginOk");
 			  request.setAttribute("url", request.getContextPath()+"/memMain.mem");
 			}
