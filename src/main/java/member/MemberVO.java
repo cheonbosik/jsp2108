@@ -4,7 +4,7 @@ public class MemberVO {
 	private int idx;
 	private String mid;
 	private String pwd;
-	private String pwdKey;
+	private int pwdKey;
 	private String nickName;
 	private String name;
 	private String gender;
@@ -43,10 +43,10 @@ public class MemberVO {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getPwdKey() {
+	public int getPwdKey() {
 		return pwdKey;
 	}
-	public void setPwdKey(String pwdKey) {
+	public void setPwdKey(int pwdKey) {
 		this.pwdKey = pwdKey;
 	}
 	public String getNickName() {

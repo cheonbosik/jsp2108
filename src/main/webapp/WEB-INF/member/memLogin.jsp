@@ -33,8 +33,10 @@
 				  <button type="submit" class="btn btn-primary">인증하기</button>&nbsp;
 				  <button type="reset" class="btn btn-primary">취소</button>&nbsp;
 				  <button type="button" onclick="location.href='<%=request.getContextPath()%>/';" class="btn btn-primary">돌아가기</button>&nbsp;
-				  <button type="button" onclick="location.href='<%=request.getContextPath()%>/memJoin.mem';" class="btn btn-primary">회원가입</button>
-				  <!-- <button type="button" class="btn btn-primary">비밀번호찾기</button> -->
+				  <button type="button" onclick="location.href='<%=request.getContextPath()%>/memJoin.mem';" class="btn btn-primary">회원가입</button><br/>
+				  <div class="row">
+				    <span class="col mt-2">[<a href="#">아이디찾기</a>] / [<a href="#">비밀번호찾기</a>]</span>
+				  </div>
 				</form>
 			</div>
 		</div>

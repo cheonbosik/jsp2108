@@ -22,7 +22,7 @@ public class PasswordOk2 extends HttpServlet {
 		System.out.println("입력된 비밀번호 : " + pwd);
 		System.out.println("------------------------");
 		
-		// 입력된 비밀변호 변환
+		// 입력된 비밀번호 변환
 		long intPwd;
 		String strPwd = "";
 		for(int i=0; i<pwd.length(); i++) {
@@ -39,12 +39,12 @@ public class PasswordOk2 extends HttpServlet {
 		// 암호화 작업(인코딩)
 		encPwd = intPwd ^ key;		// 원본비번과 암호키값을 배타적OR(exclusive OR)시킨다.
 		strPwd = String.valueOf(encPwd);	// DB에 저장하기위해 문자료 변환했다.
-		System.out.println("인코딩된 비밀번호 : " + strPwd);  // DB에 저장시킬 비밀번호
+		System.out.println("인코딩된 비밀번호(DB저장값이다) : " + strPwd);  // DB에 저장시킬 비밀번호
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		// DB에 저장된 암호를 다시 복호화(디코딩) 시킨다.
 		long decPwd;
-		intPwd = Long.parseLong(strPwd);
+		intPwd = Long.parseLong(strPwd);		// DB에 넣었던 strPwd를 다시 불러서 복호화를 위해 정수형으로 변환했다.
 		decPwd = intPwd ^ key;
 		System.out.println("디코딩된 비밀번호 : " + decPwd);  // DB저장된 암호를 복호화
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");

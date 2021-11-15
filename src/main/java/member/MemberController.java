@@ -25,6 +25,11 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("/memJoin")) {
 			viewPage += "/memJoin.jsp";
 		}
+		else if(com.equals("/memJoinOk")) {
+			command = new MemJoinOkCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
+		}
 		else if(com.equals("/idCheck")) {
 			command = new IdCheckCommand();
 			command.execute(request, response);
@@ -34,11 +39,6 @@ public class MemberController extends HttpServlet {
 			command = new NickCheckCommand();
 			command.execute(request, response);
 			viewPage += "/nickCheck.jsp";
-		}
-		else if(com.equals("/memJoinOk")) {
-			command = new MemJoinOkCommand();
-			command.execute(request, response);
-			viewPage = "/WEB-INF/message/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
