@@ -27,6 +27,9 @@
       <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath()%>/memLogin.mem">Login</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath()%>/memJoin.mem">Join</a>
+      </li>
     </ul>
   </div>  
 </nav>

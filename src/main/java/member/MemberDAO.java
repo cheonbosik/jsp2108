@@ -96,9 +96,36 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
 		} finally {
-			getConn.rsClose();
+			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	// 로그인체크(아이디가 동일한 자료가 있으면 해당자료를 vo에 담아서 넘긴다.)
+	public MemberVO loginCheck(String mid) {
+		vo = new MemberVO();
+		try {
+			sql = "select * from member where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setMid(mid);
+				vo.setPwd(rs.getString("pwd"));
+				vo.setPwdKey(rs.getInt("pwdKey"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setLevel(rs.getInt("level"));
+			}
+			else {
+				vo = null;
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vo;
 	}
 			
 }
