@@ -74,21 +74,23 @@ public class MemberDAO {
 	public int setMemberJoinOk(MemberVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into member values (default,?,?,?,?,?,default,default,?,?,?,?,?,?,default,?,?,default,default,default,default,default,default)";
+			sql = "insert into member values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,default,?,?,default,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getPwd());
 			pstmt.setInt(3, vo.getPwdKey());
 			pstmt.setString(4, vo.getNickName());
 			pstmt.setString(5, vo.getName());
-			pstmt.setString(6, vo.getTel());
-			pstmt.setString(7, vo.getAddress());
-			pstmt.setString(8, vo.getEmail());
-			pstmt.setString(9, vo.getHomePage());
-			pstmt.setString(10, vo.getJob());
-			pstmt.setString(11, vo.getHobby());
-			pstmt.setString(12, vo.getContent());
-			pstmt.setString(13, vo.getUserInfor());
+			pstmt.setString(6, vo.getGender());
+			pstmt.setString(7, vo.getBirthday());
+			pstmt.setString(8, vo.getTel());
+			pstmt.setString(9, vo.getAddress());
+			pstmt.setString(10, vo.getEmail());
+			pstmt.setString(11, vo.getHomePage());
+			pstmt.setString(12, vo.getJob());
+			pstmt.setString(13, vo.getHobby());
+			pstmt.setString(14, vo.getContent());
+			pstmt.setString(15, vo.getUserInfor());
 			pstmt.executeUpdate();
 			res = 1;
 		} catch (SQLException e) {

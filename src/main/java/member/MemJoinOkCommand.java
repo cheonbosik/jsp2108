@@ -17,15 +17,15 @@ public class MemJoinOkCommand implements MemberInterface {
 			String name_ = name;
 			String email1 = request.getParameter("email1")==null ? "": request.getParameter("email1").trim();
 			String email2 = request.getParameter("email2")==null ? "": request.getParameter("email2").trim();
-			String email = email1 + email2;
+			String email = email1 + "@" + email2;
 			String gender = request.getParameter("gender")==null ? "": request.getParameter("gender").trim();
-			String birthday = request.getParameter("birthday")==null ? "": request.getParameter("birthday").trim();
+			String birthday = request.getParameter("birthday")==null ? "": request.getParameter("birthday");
 			String tel1 = request.getParameter("tel1")==null ? "": request.getParameter("tel1").trim();
 			String tel2 = request.getParameter("tel2")==null ? "": request.getParameter("tel3").trim();
 			String tel3 = request.getParameter("tel3")==null ? "": request.getParameter("tel3").trim();
 			String tel = tel1 + "/" + tel2 + "/" + tel3;
 			String address = request.getParameter("address")==null ? "": request.getParameter("address").trim();
-			String homepage = request.getParameter("homepage")==null ? "": request.getParameter("homepage").trim();
+			String homePage = request.getParameter("homePage")==null ? "": request.getParameter("homePage").trim();
 			String job = request.getParameter("job")==null ? "": request.getParameter("job").trim();
 			String userInfor = request.getParameter("userInfor")==null ? "": request.getParameter("userInfor");
 			String[] hobbys = request.getParameterValues("hobby");
@@ -86,7 +86,7 @@ public class MemJoinOkCommand implements MemberInterface {
 			vo.setTel(tel);
 			vo.setAddress(address);
 			vo.setEmail(email);
-			vo.setHomePage(homepage);
+			vo.setHomePage(homePage);
 			vo.setJob(job);
 			vo.setHobby(hobby);
 			// 이미지 처리.....
@@ -96,11 +96,11 @@ public class MemJoinOkCommand implements MemberInterface {
 			int res = dao.setMemberJoinOk(vo);
 			
 			if(res == 1) {  // 정상적으로 회원가입완료
-				request.setAttribute("msg", "memJoinOk");
+				request.setAttribute("msg", "memberJoinOk");
 				request.setAttribute("url", request.getContextPath()+"/memLogin.mem");
 			}
 			else {
-				request.setAttribute("msg", "memJoinNo");
+				request.setAttribute("msg", "memberJoinNo");
 				request.setAttribute("url", request.getContextPath()+"/memJoin.mem");
 			}
 	}

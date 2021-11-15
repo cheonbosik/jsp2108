@@ -27,11 +27,13 @@ create table member (
 	primary key(idx, mid)								/* 키본키 : 고유번호, 아이디 */
 );
 
+/* drop table member; */
 desc member;
 
 insert into member values (default,'admin','1234',1,'관리맨','관리자',default,default,'010-3423-2704','경기도 안성시','cjsk1126@naver.com','blog.daum.net/cjsk1126','프리랜서','등산/바둑',default,'관리자입니다.',default,default,default,default,default,default,default);
 
 update member set level = 0 where mid = 'admin';
+delete from member where mid='hkd1234'; 
 
 select * from member;
 
