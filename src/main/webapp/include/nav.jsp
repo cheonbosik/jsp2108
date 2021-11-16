@@ -2,6 +2,15 @@
 <%
   int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
 %>
+<script>
+  function memberDel() {
+	  var ans = confirm("정말 탈퇴하시겠습니까?");
+	  if(ans) {
+		  ans = confirm("탈퇴후 1개월간은 같은아이디로 가입하실수 없습니다.\n탈퇴 하시겠습니까?");
+		  if(ans) location.href="<%=request.getContextPath()%>/memDelete.mem";
+	  }
+  }
+</script>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" href="<%=request.getContextPath()%>/">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -39,10 +48,10 @@
 			      <a class="dropdown-item" href="<%=request.getContextPath()%>/memList.mem">회원리스트</a>
 <%          }
             if(level != 0) { %>
-			      <a class="dropdown-item" href="<%=request.getContextPath()%>/memDelete.mem">회원탈퇴</a>
+			      <a class="dropdown-item" href="javascript:memberDel()">회원탈퇴</a>
 <%          }
             if(level == 0) { %>
-			      <a class="dropdown-item" href="<%=request.getContextPath()%>/.mem">관리자메뉴</a>
+			      <a class="dropdown-item" href="<%=request.getContextPath()%>/adMenu.ad">관리자메뉴</a>
 <%          } %>
 			    </div>
 	      </li>

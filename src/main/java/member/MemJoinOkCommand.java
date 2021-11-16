@@ -24,7 +24,7 @@ public class MemJoinOkCommand implements MemberInterface {
 			String tel2 = request.getParameter("tel2")==null ? "": request.getParameter("tel3").trim();
 			String tel3 = request.getParameter("tel3")==null ? "": request.getParameter("tel3").trim();
 			String tel = tel1 + "/" + tel2 + "/" + tel3;
-			String address = request.getParameter("address")==null ? "": request.getParameter("address").trim();
+			String address = request.getParameter("address")==null ? "": request.getParameter("address");
 			String homePage = request.getParameter("homePage")==null ? "": request.getParameter("homePage").trim();
 			String job = request.getParameter("job")==null ? "": request.getParameter("job").trim();
 			String userInfor = request.getParameter("userInfor")==null ? "": request.getParameter("userInfor");

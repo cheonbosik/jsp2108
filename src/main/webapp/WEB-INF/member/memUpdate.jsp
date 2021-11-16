@@ -15,11 +15,11 @@
 	decPwd = intPwd ^ pwdValue;
 	String strPwd = String.valueOf(decPwd);
 	
-	String pwd = "";
+	String result = "";
 	char ch;
 	for(int i=0; i<strPwd.length(); i+=2) {
 		ch = (char) Integer.parseInt(strPwd.substring(i, i+2));
-		pwd += ch;
+		result += ch;
 	}
 	
 	// 이메일 처리
@@ -56,6 +56,7 @@
   <script src="<%=request.getContextPath()%>/js/woo.js"></script>
   <script>
   	var nickCheckOn = 0;
+  	var nickCheckSw = 0;
   
   	// 닉네임 중복체크
     function nickCheck() {
@@ -68,6 +69,7 @@
     	}
     	else {
     		nickCheckOn = 1;
+    		nickCheckSw = 1;
     		window.open(url,"nWin","width=500px,height=250px");
     	}
     }
@@ -101,7 +103,7 @@
     	}
     	// 기타 추가 체크해야 할 항목들을 모두 체크하세요.
     	else {
-    		if(nickCheckOn == 1) {
+    		if(nickCheckOn == 1 || nickCheckSw == 0) {
     			var postcode = myform.postcode.value;
     			var roadAddress = myform.roadAddress.value;
     			var detailAddress = myform.detailAddress.value;
@@ -122,15 +124,15 @@
 <%@ include file="../../include/header_home.jsp" %>
 <%@ include file="../../include/nav.jsp" %>
 <div class="container" style="padding:30px">
-  <form name="myform" method="post" action="<%=request.getContextPath()%>/memJoinOk.mem" class="was-validated">
+  <form name="myform" method="post" action="<%=request.getContextPath()%>/memUpdateOk.mem" class="was-validated">
     <h2>회 원 정 보 수 정</h2>
     <br/>
     <div class="form-group">
       아이디 : ${sMid}
     </div>
     <div class="form-group">
-      <label for="pwd">비밀번호 :</label>
-      <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요." name="pwd" value="<%=pwd%>" maxlength="9" required/>    </div>
+      <label for="pwd">비밀번호 :<%=result%></label>
+      <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요." name="pwd" value="<%=result%>" maxlength="9" required/>    </div>
     <div class="form-group">
       <label for="nickname">닉네임 : &nbsp; &nbsp;<input type="button" value="닉네임 중복체크" class="btn btn-secondary" onclick="nickCheck()"/></label>
       <input type="text" class="form-control" id="nickName" onkeyup="nickReset()"  placeholder="별명을 입력하세요." name="nickName" value="<%=vo.getNickName()%>" required/>
@@ -275,13 +277,11 @@
 					if(hobby[i].equals(hobbys[j])) {
 %>
 						checked
-<%
-						break;
+<%					break;
 					}
 				}
 %>
 				/><%=hobby[i]%> &nbsp;
-
 <%		} %>
     </div>
     <div class="form-group">
@@ -301,9 +301,10 @@
 			  </label>
 			</div>
     </div>
-    <button type="button" class="btn btn-secondary" onclick="fCheck()">회원가입</button>
+    <button type="button" class="btn btn-secondary" onclick="fCheck()">회원정보수정</button>
     <button type="reset" class="btn btn-secondary">다시작성</button>
-    <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/memLogin.mem';">돌아가기</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/memMain.mem';">돌아가기</button>
+    <input type="hidden" name="mid" value="${sMid}"/>
   </form>
   <p><br/></p>
 </div>
