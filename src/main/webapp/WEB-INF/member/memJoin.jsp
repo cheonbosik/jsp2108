@@ -90,10 +90,10 @@
     	else {
     		if(idCheckOn == 1 && nickCheckOn == 1) {
     			//alert("입력처리 되었습니다.!");
-    			var postcode = myform.postcode.value;
-    			var roadAddress = myform.roadAddress.value;
-    			var detailAddress = myform.detailAddress.value;
-    			var extraAddress = myform.extraAddress.value;
+    			var postcode = myform.postcode.value + " ";
+    			var roadAddress = myform.roadAddress.value + " ";
+    			var detailAddress = myform.detailAddress.value + " ";
+    			var extraAddress = myform.extraAddress.value + " ";
     			myform.address.value = postcode + "/" + roadAddress + "/" + detailAddress + "/" + extraAddress
     			myform.submit();
     		}
