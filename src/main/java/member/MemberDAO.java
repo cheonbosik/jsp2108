@@ -119,6 +119,19 @@ public class MemberDAO {
 				vo.setLastDate(rs.getString("lastDate"));
 				vo.setPoint(rs.getInt("point"));
 				vo.setTodayCnt(rs.getInt("todayCnt"));
+				
+				// 회원정보 수정을 위해서 member.sql에 있는 모든 정보를 다 담아서 넘겨준다.
+				vo.setName(rs.getString("name"));
+				vo.setEmail(rs.getString("email"));
+				vo.setGender(rs.getString("gender"));
+				vo.setBirthday(rs.getString("birthday"));
+				vo.setTel(rs.getString("tel"));
+				vo.setAddress(rs.getString("address"));
+				vo.setHomePage(rs.getString("homePage"));
+				vo.setJob(rs.getString("job"));
+				vo.setHobby(rs.getString("hobby"));
+				vo.setContent(rs.getString("content"));
+				vo.setUserInfor(rs.getString("userInfor"));
 			}
 			else {
 				vo = null;
@@ -160,6 +173,7 @@ public class MemberDAO {
 			vo.setVisitCnt(rs.getInt("visitCnt"));
 			vo.setTodayCnt(rs.getInt("todayCnt"));
 			vo.setPoint(rs.getInt("point"));
+			vo.setName(rs.getString("name"));
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
 		} finally {

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import guest.GuestDAO;
+
 public class MemMainCommand implements MemberInterface {
 
 	@Override
@@ -14,6 +16,7 @@ public class MemMainCommand implements MemberInterface {
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 99: (int) session.getAttribute("sLevel");
 		String mid = session.getAttribute("sMid")==null ? "": (String) session.getAttribute("sMid");
+		String nickName = session.getAttribute("sNickName")==null ? "": (String) session.getAttribute("sNickName");
 		
 	  String strLevel = "";
 	  if(level == 0) strLevel = "관리자";
@@ -29,6 +32,11 @@ public class MemMainCommand implements MemberInterface {
 	  request.setAttribute("visitCnt", vo.getVisitCnt());
 	  request.setAttribute("todayCnt", vo.getTodayCnt());
 	  request.setAttribute("point", vo.getPoint());
+	  
+	  // 사용자가 방명록에 올린 글의 개수 담아오기
+	  GuestDAO guestDAO = new GuestDAO();
+	  int guestCnt = guestDAO.getWriteCnt(mid, nickName, vo.getName());
+	  request.setAttribute("guestCnt", guestCnt);
 	}
 
 }

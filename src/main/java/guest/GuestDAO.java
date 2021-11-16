@@ -137,4 +137,24 @@ public class GuestDAO {
 		}
 		return totRecCnt;
 	}
+
+	// 사용자가 방명록에 올린 글의 수를 구해온다.
+	public int getWriteCnt(String mid, String nickName, String name) {
+		int guestCnt = 0;
+		try {
+			sql = "select count(*) from guest where name like ? or name like ? or name like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+mid+"%");
+			pstmt.setString(2, "%"+nickName+"%");
+			pstmt.setString(3, "%"+name+"%");
+			rs = pstmt.executeQuery();
+			rs.next();
+			guestCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return guestCnt;
+	}
 }

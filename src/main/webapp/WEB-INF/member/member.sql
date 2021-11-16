@@ -40,6 +40,7 @@ update member set pwd = '127420962', pwdKey=15, tel='010/3423/2704', address='�
 delete from member where mid='hkd1234';
 
 select * from member;
+select count(*) from guest where name like '%홍길동%' or name like '%hkd1234%' or name like '%홍장군%';
 
 /* 해시테이블(비밀번호 키/값) */
 create table hashTable(

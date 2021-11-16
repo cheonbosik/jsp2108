@@ -22,7 +22,7 @@
   <p>오늘 방문횟수 : <font color="blue">${todayCnt}</font> 회</p>
   <p>총 포인트 : <font color="blue">${point}</font></p>
   <p>활동내역 :
-  	방명록에 올린글수 : __개<br/>
+  	방명록에 올린글수 : <font color="blue">${guestCnt}</font> 개 : 성명이나 아이디나 닉네임이 일치하는 자료의 갯수를 불러온다.<br/>
   	게시판에 올린글수 : __개<br/>
   	자료실 업로드 횟수 : __개<br/>
   </p>
