@@ -20,6 +20,8 @@ public class MemberController extends HttpServlet {
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
 		if(com.equals("/memLogin")) {
+			command = new MemLoginCommand();  // 로그인시 저장된 아이디가 있는지를 쿠키로 처리하기위해 커맨드객체생성처리
+			command.execute(request, response);
 			viewPage += "/memLogin.jsp";
 		}
 		else if(com.equals("/memLoginOk")) {

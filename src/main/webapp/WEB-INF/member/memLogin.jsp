@@ -20,7 +20,7 @@
 			  <form name="myform" method="post" action="<%=request.getContextPath()%>/memLoginOk.mem" class="was-validated">
 				  <div class="form-group">
 				    <label for="mid">회원 아이디 :</label>
-				    <input type="text" class="form-control" id="mid" placeholder="아이디를 입력하세요." name="mid" required autofocus />
+				    <input type="text" class="form-control" id="mid" placeholder="아이디를 입력하세요." name="mid" value="${mid}" required autofocus />
 				    <div class="valid-feedback">정확한 아이디를 입력하세요.</div>
 				    <div class="invalid-feedback">회원아이디는 필수 입력사항입니다.</div>
 				  </div>
@@ -34,8 +34,9 @@
 				  <button type="reset" class="btn btn-primary">취소</button>&nbsp;
 				  <button type="button" onclick="location.href='<%=request.getContextPath()%>/';" class="btn btn-primary">돌아가기</button>&nbsp;
 				  <button type="button" onclick="location.href='<%=request.getContextPath()%>/memJoin.mem';" class="btn btn-primary">회원가입</button><br/>
-				  <div class="row">
-				    <span class="col mt-2">[<a href="#">아이디찾기</a>] / [<a href="#">비밀번호찾기</a>]</span>
+				  <div class="row" style="font-size:12px;">
+				    <span class="col mt-3"><input type="checkbox" name="idCheck" checked/> 아이디 저장</span>
+				    <span class="col mt-3">[<a href="#">아이디찾기</a>] / [<a href="#">비밀번호찾기</a>]</span>
 				  </div>
 				</form>
 			</div>

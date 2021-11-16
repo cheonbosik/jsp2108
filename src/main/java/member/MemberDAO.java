@@ -118,6 +118,7 @@ public class MemberDAO {
 				vo.setLevel(rs.getInt("level"));
 				vo.setLastDate(rs.getString("lastDate"));
 				vo.setPoint(rs.getInt("point"));
+				vo.setTodayCnt(rs.getInt("todayCnt"));
 			}
 			else {
 				vo = null;
@@ -130,17 +131,41 @@ public class MemberDAO {
 		return vo;
 	}
 
-	public void setLastDateUpdate(String mid) {
+	// 로그인시 갱신 처리해야 할 항목들을 작업한다.
+	public void setLastDateUpdate(String mid, int newPoint, int todayCnt) {
 		try {
-			sql = "update member set lastDate = now(), point = point + 10, visitCnt = visitCnt + 1 where mid = ?";
+			sql = "update member set lastDate = now(), point = point + ?, visitCnt = visitCnt + 1, todayCnt = ? where mid = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mid);
+			pstmt.setInt(1, newPoint);
+			pstmt.setInt(2, todayCnt);
+			pstmt.setString(3, mid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
+	}
+
+	// 로그인사용자의 접속정보 가져오기(총방문회수, 오늘 방문횟수)
+	public MemberVO getUserInfor(String mid) {
+		vo = new MemberVO();
+		try {
+			sql = "select * from member where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			vo.setVisitCnt(rs.getInt("visitCnt"));
+			vo.setTodayCnt(rs.getInt("todayCnt"));
+			vo.setPoint(rs.getInt("point"));
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vo;
 	}
 			
 }

@@ -17,10 +17,10 @@
   <hr/>
   <p><font color="blue">${sNickName}</font>님 로그인 중이십니다.</p>
   <p>현재 <font color="red">${strLevel}</font> 이십니다.</p>
-  <p>최종 접속일 : ${sLastDate}</p>
-  <p>총 방문횟수 : __</p>
-  <p>오늘 방문횟수 : __</p>
-  <p>포인트 합계 : __</p>
+  <p>최종 접속일 : <font color="blue">${sLastDate}</font></p>
+  <p>총 방문횟수 : <font color="blue">${visitCnt}</font> 회</p>
+  <p>오늘 방문횟수 : <font color="blue">${todayCnt}</font> 회</p>
+  <p>총 포인트 : <font color="blue">${point}</font></p>
   <p>활동내역 :
   	방명록에 올린글수 : __개<br/>
   	게시판에 올린글수 : __개<br/>
