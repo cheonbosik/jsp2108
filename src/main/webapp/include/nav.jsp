@@ -35,6 +35,10 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping.url">URL(확장자)매핑</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping.url2">URL(확장자)매핑2</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/password">비밀번호암호화</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/el1.st">EL학습1</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/el2.st">EL학습2</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl1.st">JSTL학습1</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl2.st">JSTL학습2</a>
 		    </div>
       </li>
 <%    } %>
