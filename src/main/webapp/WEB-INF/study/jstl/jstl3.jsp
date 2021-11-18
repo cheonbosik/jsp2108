@@ -202,6 +202,7 @@
   <h4>redirect문 == response.sendRedirect(경로) == location.href(경로)</h4>
   <%-- <c:redirect url="${ctp}/jstl1.st"/> --%>
   <hr/>
+  <%--
   <h4>URL문 : 그림파일과 같은 외부파일을 불러온다.</h4>
   <p><img src="${ctp}/images/noimage.jpg" width="200px"/></p>
   <p>
@@ -210,6 +211,18 @@
   </p>
   <p>
     <c:set var="data2" value="${ctp}/images/noimage.jpg"/>
+    <img src="${data2}" width="100px"/>
+  </p>
+  --%>
+  <h4>URL문 : 그림파일과 같은 외부파일을 불러온다.</h4>
+  <p><img src="${ctp}/noimage.st" width="200px"/></p>
+  <p><img src="images/noimage.jpg" width="200px"/></p>
+  <p>
+    <c:url var="data" value="images/noimage.jpg"/>
+    <img src="${data}" width="150px"/>
+  </p>
+  <p>
+    <c:set var="data2" value="images/noimage.jpg"/>
     <img src="${data2}" width="100px"/>
   </p>
 </div>

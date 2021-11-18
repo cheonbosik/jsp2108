@@ -23,6 +23,7 @@
   	else if(msg == "memberLoginPwdNo") msg = "비밀번호를 확인하세요.";
   	else if(msg == "memberUpdateOk") msg = "회원정보가 수정되었습니다.^.^.";
   	else if(msg == "memberUpdateNo") msg = "회원정보가 수정되지 않았습니다.ㅜㅜ.";
+  	else if(msg == "memberLevelChangeOk") msg = "회원 등급이 변경 되었습니다.";
   	
     alert(msg);
     if(url != "") location.href = url;

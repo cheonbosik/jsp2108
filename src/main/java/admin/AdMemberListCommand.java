@@ -15,9 +15,22 @@ public class AdMemberListCommand implements AdminInterface {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();
-		ArrayList<MemberVO> vos = dao.getMemberList();
+		
+		/* 이곳부터 페이징 처리 변수 지정 시작 */
+	  int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));	// 현재페이지 구하기
+	  int pageSize = 5;				  					// 1. 한 페이지 분량
+	  int totRecCnt = dao.totRecCnt();		// 2. 총 레코드건수 구하기
+	  int totPage = (totRecCnt % pageSize)==0 ? totRecCnt/pageSize : (totRecCnt/pageSize) + 1;  //3. 총 페이지 수를 구한다.
+	  int startIndexNo = (pag - 1) * pageSize;			// 4. 현재페이지의 시작 index번호
+	  int curScrStrarNo = totRecCnt - startIndexNo;	// 5. 현재 화면에 보이는 방문소감 시작번호
+	  /* 이곳까지 페이징 처리 변수 지정 끝 */
+		
+		ArrayList<MemberVO> vos = dao.getMemberList(startIndexNo, pageSize);
 		
 		request.setAttribute("vos", vos);
+		request.setAttribute("pag", pag);
+		request.setAttribute("totPage", totPage);
+		request.setAttribute("curScrStrarNo", curScrStrarNo);
 	}
 
 }
