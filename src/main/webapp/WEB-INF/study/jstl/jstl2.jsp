@@ -122,6 +122,49 @@
     </c:forEach>
   </p>
   <hr/>
+  <p>10. 반복문(배열연습-1차원)<br/>
+    <c:forEach var="arr" items="${arr1}" varStatus="st">
+    	${st.count} :  ${arr}<br/>
+    </c:forEach>
+  </p>
+  <hr/>
+  <p>11. 반복문(배열연습-2차원)<br/>
+    <c:forEach var="rowArr" items="${arr2}" varStatus="rowSt">
+    	<c:forEach var="colArr" items="${rowArr}" varStatus="colSt">
+    		rowSt=${rowSt.count} : colst=${colSt.count} : 자료=${colArr} <br/>
+    	</c:forEach>
+    </c:forEach>
+  </p>
+  <hr/>
+  <p>12. 반복문(배열연습-2차원 - 2)<br/>
+    <c:forEach var="rowArr" items="${arr2}" varStatus="rowSt">
+    	<c:forEach var="colArr" items="${rowArr}" varStatus="colSt">
+    		rowSt=${rowSt.count} : colst=${colSt.count} : 자료=${colArr}
+    	</c:forEach>
+    	<br/>
+    </c:forEach>
+  </p>
+  <hr/>
+  <p>13. 반복문(배열연습-2차원 - 3)<br/>
+    <c:set var="cnt" value="0"/>
+    <c:forEach var="rowArr" items="${arr2}">
+    	<c:forEach var="colArr" items="${rowArr}">
+    	  <c:set var="cnt" value="${cnt + 1}"/>
+    		${cnt} : ${colArr} / &nbsp;
+    		<c:if test="${cnt % 2 == 0}"><br/></c:if>
+    	</c:forEach>
+    </c:forEach>
+  </p>
+  <hr/>
+  <p>14. 반복문(배열연습-2차원 - 지역번호 : 지역명)<br/>
+    <c:forEach var="rowTel" items="${tel}">
+      <c:forEach var="tel" items="${rowTel}">
+      	${tel} :
+      </c:forEach>
+      <br/>
+    </c:forEach>
+  </p>
+  <hr/>
 <%
   String hobbys = "등산/낚시/바둑/영화감상/수영";
   pageContext.setAttribute("hobbys", hobbys);

@@ -39,6 +39,7 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/el2.st">EL학습2</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl1.st">JSTL학습1</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl2.st">JSTL학습2</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl3.st">JSTL학습3</a>
 		    </div>
       </li>
 <%    } %>
