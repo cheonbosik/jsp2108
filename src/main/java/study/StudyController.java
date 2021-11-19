@@ -39,6 +39,11 @@ public class StudyController extends HttpServlet {
 		else if(com.equals("/noimage")) {
 			viewPage = "/WEB-INF/message/noimage.jpg"; 
 		}
+		else if(com.equals("/ajax1")) {
+			command = new Ajax1Command();
+			command.execute(request, response);
+			viewPage += "/ajax/ajax1.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

@@ -42,6 +42,12 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl3.st">JSTL학습3</a>
 		    </div>
       </li>
+      <li class="nav-item dropdown mr-2">
+        <a class="nav-link btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Study2</a>
+		    <div class="dropdown-menu">
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/ajax1.st">AJax연습</a>
+		    </div>
+      </li>
 <%    } %>
 <%    if(level != 99) { %>
 	      <li class="nav-item dropdown">
