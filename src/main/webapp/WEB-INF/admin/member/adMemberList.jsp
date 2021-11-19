@@ -50,12 +50,13 @@
 	          <c:when test="${level==2}"><c:set var="title" value="정"/></c:when>
 	          <c:when test="${level==3}"><c:set var="title" value="우수"/></c:when>
 	        </c:choose>
+	        <c:if test="${!empty mid}"><c:set var="title" value="${mid}"/></c:if>
 	        <h2 style="text-align:center;">${title} 회원 리스트</h2>
 	      </td>
 	    </tr>
 	    <tr>
 	      <td style="text-align:left">
-	        <input type="text" name="mid" placeholder="검색할아이디입력"/>
+	        <input type="text" name="mid" value="${mid}" placeholder="검색할아이디입력"/>
 	        <input type="button" value="개별검색" onclick="midSearch()"/>
 	        <input type="button" value="전체보기" onclick="location.href='${ctp}/adMemberList.ad';" class="btn btn-secondary btn-sm"/>
 	      </td>
@@ -128,13 +129,16 @@
   <br/>
   
 <!-- 페이징처리 시작 -->
-<div style="text-align:center">
-  <c:if test="${pag != 1}"><a href="${ctp}/adMemberList.ad?pag=1&level=${level}">◁◁</a></c:if> &nbsp;&nbsp;
-  <c:if test="${pag > 1}"><a href="${ctp}/adMemberList.ad?pag=${pag-1}&level=${level}">◀</a></c:if>
-  &nbsp;&nbsp; ${pag}Page / ${totPage}pages &nbsp;&nbsp;
-  <c:if test="${pag < totPage}"><a href="${ctp}/adMemberList.ad?pag=${pag+1}&level=${level}">▶</a></c:if> &nbsp;&nbsp;
-  <c:if test="${pag != totPage}"><a href="${ctp}/adMemberList.ad?pag=${totPage}&level=${level}">▷▷</a></c:if>
-</div>
+<c:if test="${totPage == 0}"><p style="text-align:center"><b>자료가 없습니다.</b></p></c:if>
+<c:if test="${totPage != 0}">
+	<div style="text-align:center">
+	  <c:if test="${pag != 1}"><a href="${ctp}/adMemberList.ad?pag=1&level=${level}&mid=${mid}">◁◁</a></c:if> &nbsp;&nbsp;
+	  <c:if test="${pag > 1}"><a href="${ctp}/adMemberList.ad?pag=${pag-1}&level=${level}&mid=${mid}">◀</a></c:if>
+	  &nbsp;&nbsp; ${pag}Page / ${totPage}pages &nbsp;&nbsp;
+	  <c:if test="${pag < totPage}"><a href="${ctp}/adMemberList.ad?pag=${pag+1}&level=${level}&mid=${mid}">▶</a></c:if> &nbsp;&nbsp;
+	  <c:if test="${pag != totPage}"><a href="${ctp}/adMemberList.ad?pag=${totPage}&level=${level}&mid=${mid}">▷▷</a></c:if>
+	</div>
+</c:if>
 <!-- 페이징처리 끝 -->
 
 </div>

@@ -249,19 +249,26 @@ public class MemberDAO {
 	}
 
 	// 회원 전체 리스트 가저오기
-	public ArrayList<MemberVO> getMemberList(int startIndexNo, int pageSize, int level) {
+	public ArrayList<MemberVO> getMemberList(int startIndexNo, int pageSize, int level, String mid) {
 		ArrayList<MemberVO> vos = new ArrayList<MemberVO>();
 		try {
-			if(level == 99) {
+			if(level == 99 && mid.equals("")) {
 				sql = "select * from member order by idx desc limit ?, ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, startIndexNo);
 				pstmt.setInt(2, pageSize);
 			}
-			else {
+			else if(level != 99 && mid.equals("")) {
 				sql = "select * from member where level = ? order by idx desc limit ?, ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, level);
+				pstmt.setInt(2, startIndexNo);
+				pstmt.setInt(3, pageSize);
+			}
+			else {
+				sql = "select * from member where mid like ? order by idx desc limit ?, ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+mid+"%");
 				pstmt.setInt(2, startIndexNo);
 				pstmt.setInt(3, pageSize);
 			}
@@ -346,17 +353,22 @@ public class MemberDAO {
 	}
 
 	// 페이징처리를 위한 총 회원수 구하기
-	public int totRecCnt(int level) {
+	public int totRecCnt(int level, String mid) {
 		int totRecCnt = 0;
 		try {
-			if(level == 99) {
+			if(level == 99 && mid.equals("")) {
 				sql = "select count(*) from member";
 				pstmt = conn.prepareStatement(sql);
 			}
-			else {
+			else if(level != 99 && mid.equals("")) {
 				sql = "select count(*) from member where level = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, level);
+			}
+			else {
+				sql = "select count(*) from member where mid like ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+mid+"%");
 			}
 			rs = pstmt.executeQuery();
 			rs.next();
