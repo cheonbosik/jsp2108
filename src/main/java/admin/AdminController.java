@@ -22,12 +22,11 @@ public class AdminController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("sMid");
-		int level = (int) session.getAttribute("sLevel");
+		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
 		if(mid == null || level != 0) {
 			viewPage = "/WEB-INF/member/memLogin.jsp";
 		}
-		
-		if(com.equals("/adMenu")) {
+		else if(com.equals("/adMenu")) {
 			viewPage += "/adMenu.jsp";
 		}
 		else if(com.equals("/adLeft")) {
@@ -52,6 +51,11 @@ public class AdminController extends HttpServlet {
 			command = new AdMemberInforCommand();
 			command.execute(request, response);
 			viewPage += "/member/adMemberInfor.jsp";
+		}
+		else if(com.equals("/adMemberReset")) {
+			command = new AdMemberResetCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

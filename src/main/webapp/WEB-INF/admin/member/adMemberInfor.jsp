@@ -10,6 +10,9 @@
   <meta charset="UTF-8">
   <title>adMemberInfor.jsp</title>
   <%@ include file="/include/bs4.jsp" %>
+  <script>
+    
+  </script>
 </head>
 <body>
 <p><br></p>
@@ -33,7 +36,7 @@
     <tr><td>공개여부 : ${vo.userInfor}</td></tr>
     <tr>
       <td>탈퇴여부 : 
-        <c:if test="${vo.userDel ne 'NO'}">탈퇴신청</c:if>
+        <c:if test="${vo.userDel ne 'NO'}"><font color="red">탈퇴신청</font></c:if>
         <c:if test="${vo.userDel eq 'NO'}">활동중</c:if>
       </td>
     </tr>
@@ -54,6 +57,8 @@
     <tr><td>최종방문일 : ${vo.lastDate}</td></tr>
     <tr><td>오늘방문수 : ${vo.todayCnt}</td></tr>
   </table>
+  <hr/>
+  <a href="${ctp}/adMemberList.ad" class="btn btn-secondary">돌아가기</a>
 </div>
 <br/>
 </body>

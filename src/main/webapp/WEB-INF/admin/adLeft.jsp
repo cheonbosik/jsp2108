@@ -20,7 +20,7 @@
 <body>
 <p><br></p>
 <div class="container">
-  <h6>관리자메뉴</h6>
+  <h6><a href="${ctp}/adContent.ad" target="adContent">관리자메뉴</a></h6>
   <hr/>
   <p><a href="${ctp}/adMemberList.ad" target="adContent">회원관리</a></p>
   <hr/>

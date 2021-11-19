@@ -249,13 +249,22 @@ public class MemberDAO {
 	}
 
 	// 회원 전체 리스트 가저오기
-	public ArrayList<MemberVO> getMemberList(int startIndexNo, int pageSize) {
+	public ArrayList<MemberVO> getMemberList(int startIndexNo, int pageSize, int level) {
 		ArrayList<MemberVO> vos = new ArrayList<MemberVO>();
 		try {
-			sql = "select * from member order by idx desc limit ?, ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startIndexNo);
-			pstmt.setInt(2, pageSize);
+			if(level == 99) {
+				sql = "select * from member order by idx desc limit ?, ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startIndexNo);
+				pstmt.setInt(2, pageSize);
+			}
+			else {
+				sql = "select * from member where level = ? order by idx desc limit ?, ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, level);
+				pstmt.setInt(2, startIndexNo);
+				pstmt.setInt(3, pageSize);
+			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				vo = new MemberVO();
@@ -337,11 +346,18 @@ public class MemberDAO {
 	}
 
 	// 페이징처리를 위한 총 회원수 구하기
-	public int totRecCnt() {
+	public int totRecCnt(int level) {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(*) from member";
-			pstmt = conn.prepareStatement(sql);
+			if(level == 99) {
+				sql = "select count(*) from member";
+				pstmt = conn.prepareStatement(sql);
+			}
+			else {
+				sql = "select count(*) from member where level = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, level);
+			}
 			rs = pstmt.executeQuery();
 			rs.next();
 			totRecCnt = rs.getInt(1);
@@ -351,5 +367,19 @@ public class MemberDAO {
 			getConn.rsClose();
 		}
 		return totRecCnt;
+	}
+
+	// 회원을 member테이블에서 삭제처리한다.
+	public void setMemberReset(int idx) {
+		try {
+			sql = "delete from member where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
 	}
 }
