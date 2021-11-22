@@ -23,7 +23,7 @@
       </li>
 <%    if(level != 99 && level !=1) { %>
       <li class="nav-item">
-        <a class="nav-link" href="#">BOARD</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/boList.bo">BOARD</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">PDS</a>

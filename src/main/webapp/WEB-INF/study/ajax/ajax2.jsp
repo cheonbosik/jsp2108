@@ -35,6 +35,7 @@
     			//}
     			data : query,
     			success : function(data) {
+    			  //alert(data);
     				var dataStr = data.substring(1,data.length-3);
     				var dataArr = dataStr.split(",");
     				
@@ -49,6 +50,13 @@
     		});
     	});
     });
+    
+    function fCheck() {
+    	var do2 = $("#do").val();
+    	var city = $("#city").val();
+    	
+    	alert("선책하신 지역은? " + do2 + " / " + city);
+    }
   </script>
 </head>
 <body>
