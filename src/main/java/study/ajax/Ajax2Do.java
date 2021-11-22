@@ -17,8 +17,6 @@ public class Ajax2Do extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dodo = request.getParameter("dodo");
 		
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		
 		ArrayList<String> vos = new ArrayList<String>();
 		
 		if(dodo.equals("서울")) {
@@ -66,14 +64,7 @@ public class Ajax2Do extends HttpServlet {
 			vos.add("논산시");
 		}
 		
-		map.put("city", vos);
-		
-		//response.getWriter().write(dodoReturn(vos));
 		PrintWriter out = response.getWriter();
-		out.println(map);
+		out.println(vos);
 	}
-
-//	private ArrayList<String> dodoReturn(ArrayList<String> vos) {
-//		return vos;
-//	}
 }

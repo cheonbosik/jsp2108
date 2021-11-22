@@ -147,6 +147,26 @@ public class UserDAO {
 		}
 		return res;
 	}
+
+	// idx(고유번호)를 이용한 자료 검색
+	public UserVO getIdxSearch(int idx) {
+		vo = new UserVO();
+		try {
+			sql = "select * from user where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			rs.next();
+			vo.setIdx(idx);
+			vo.setName(rs.getString("name"));
+			vo.setAge(rs.getInt("age"));
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vo;
+	}
 	
 	
 }

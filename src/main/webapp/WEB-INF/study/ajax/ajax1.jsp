@@ -171,7 +171,7 @@
 	      <td>${vo.name}</td>
 	      <td>${vo.age}</td>
 	      <td>
-	        <a href="${ctp}/userUpdate?idx=${vo.idx}" class="btn btn-secondary btn-sm">수정</a>
+	        <a href="${ctp}/userUpdate?idx=${vo.idx}" class="btn btn-secondary btn-sm">수정</a> &nbsp;
 	        <a href="javascript:delCheck(${vo.idx})" class="btn btn-secondary btn-sm">삭제</a>
 	      </td>
 	    </tr>
