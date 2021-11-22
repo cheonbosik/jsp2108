@@ -46,6 +46,7 @@
         <a class="nav-link btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Study2</a>
 		    <div class="dropdown-menu">
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/ajax1.st">AJax연습</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/ajax2.st">AJax연습2</a>
 		    </div>
       </li>
 <%    } %>

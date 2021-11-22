@@ -9,10 +9,10 @@
   <%@ include file="/include/bs4.jsp" %>
   <script>
     function idCheck() {
-    	var mid = myform.mid.value;
+    	var mid = searchForm.mid.value;
     	if(mid == "") {
     		alert("아이디를 입력하세요.");
-    		myform.mid.focus();
+    		searchForm.mid.focus();
     		return false;
     	}
     	
@@ -26,7 +26,8 @@
     		type : "get",
     		url  : "${ctp}/ajax1Ok",
     		//data : {mid:'hkd1234',age:22,......}
-    		data : query,
+    		data : query,    // data : {mid:mid},
+    		// contentType: "application/json"; charset : "utf-8",
     		success : function(data) {
     			// 성공적으로 ajax(비동기식)처리 끝내고 돌아왔을경우 수행하는곳
     			if(data == "") {
@@ -66,6 +67,7 @@
     		success : function(data) {
     			if(data == "1") {
     				alert("등록 성공!");
+    				location.reload();
     			}
     		}
     	});
@@ -77,7 +79,35 @@
     		type : "post",
     		url  : "${ctp}/userList",
     		success : function(data) {
-    			location.reload();
+    			if(data == "1") {
+    				alert("전체자료를 출력합니다.");
+    				location.reload();
+    			}
+    		}
+    	});
+    }
+    	
+    // 자료 삭제
+    function delCheck(idx) {
+    	var ans = confirm("자료를 삭제하시겠습니까?");
+    	// if(ans) location.href = "${ctp}/userDelete?idx="+idx;
+    	var query = {
+    			idx : idx
+    	}
+    	
+    	$.ajax({
+    		type : "get",
+    		url  : "${ctp}/userDelete",
+    		data : query,
+    		success: function(res) {
+    			alert("0.자료가 삭제되었습니다.");
+    			if(res == "1") {
+    				alert("자료가 삭제되었습니다.");
+    				location.reload();
+    			}
+    		},
+    		error: function() {
+   				alert("삭제 오류!!!");
     		}
     	});
     }
@@ -133,12 +163,17 @@
       <th>번호</th>
       <th>성명</th>
       <th>나이</th>
+      <th>처리</th>
     </tr>
     <c:forEach var="vo" items="${vos}">
 	    <tr>
 	      <td>${vo.idx}</td>
 	      <td>${vo.name}</td>
 	      <td>${vo.age}</td>
+	      <td>
+	        <a href="${ctp}/userUpdate?idx=${vo.idx}" class="btn btn-secondary btn-sm">수정</a>
+	        <a href="javascript:delCheck(${vo.idx})" class="btn btn-secondary btn-sm">삭제</a>
+	      </td>
 	    </tr>
     </c:forEach>
   </table>
