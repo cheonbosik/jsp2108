@@ -87,6 +87,7 @@ public class MemLoginOkCommand implements MemberInterface {
 				
 			  request.setAttribute("msg", "memberLoginOk");
 			  request.setAttribute("url", request.getContextPath()+"/memMain.mem");
+			  request.setAttribute("val", vo.getNickName());
 			}
 			else {
 				request.setAttribute("msg", "memberLoginPwdNo");

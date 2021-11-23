@@ -14,11 +14,13 @@ public class MemLogOutCommand implements MemberInterface {
 		
 		
 		HttpSession session = request.getSession();
+		String nickName = (String) session.getAttribute("sNickName");
 		
 		session.invalidate();
 		
 		request.setAttribute("msg", "memberLogoutOk");
 		request.setAttribute("url", request.getContextPath()+"/memLogin.mem");
+		request.setAttribute("val", nickName);
 	}
 
 }
