@@ -10,7 +10,7 @@ public class BoardVO {
 	private String wDate;
 	private int readNum;
 	private String hostIp;
-	private int goods;
+	private int good;
 	private String mid;
 	
 	public int getIdx() {
@@ -67,11 +67,11 @@ public class BoardVO {
 	public void setHostIp(String hostIp) {
 		this.hostIp = hostIp;
 	}
-	public int getGoods() {
-		return goods;
+	public int getGood() {
+		return good;
 	}
-	public void setGoods(int goods) {
-		this.goods = goods;
+	public void setGood(int good) {
+		this.good = good;
 	}
 	public String getMid() {
 		return mid;
@@ -83,6 +83,6 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", nickName=" + nickName + ", title=" + title + ", email=" + email + ", homePage="
 				+ homePage + ", content=" + content + ", wDate=" + wDate + ", readNum=" + readNum + ", hostIp=" + hostIp
-				+ ", goods=" + goods + ", mid=" + mid + "]";
+				+ ", good=" + good + ", mid=" + mid + "]";
 	}
 }

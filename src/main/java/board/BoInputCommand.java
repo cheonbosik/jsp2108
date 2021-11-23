@@ -21,8 +21,6 @@ public class BoInputCommand implements BoardInterface {
 		
 		MemberVO vo = dao.getUserInfor(mid);
 		
-		System.out.println("vo : " + vo);
-		
 		request.setAttribute("email", vo.getEmail());
 		request.setAttribute("homePage", vo.getHomePage());
 	}

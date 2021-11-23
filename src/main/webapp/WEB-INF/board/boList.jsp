@@ -20,11 +20,11 @@
 <div class="container">
   <table class="table table-borderless">
     <tr>
-      <td><h2>게 시 판 리 스 트</h2></td>
+      <td class="p-0"><h2>게 시 판 리 스 트</h2></td>
     </tr>
     <tr>
-      <td class="text-left">
-        <a href="${ctp}/boInput.bo" class="btn btn-secondary">글쓰기</a>
+      <td class="text-left p-0">
+        <a href="${ctp}/boInput.bo" class="btn btn-secondary btn-sm">글쓰기</a>
       </td>
     </tr>
   </table>
@@ -44,7 +44,7 @@
 	      <td>${vo.nickName}</td>
 	      <td>${vo.wDate}</td>
 	      <td>${vo.readNum}</td>
-	      <td>${vo.goods}</td>
+	      <td>${vo.good}</td>
 	    </tr>
     </c:forEach>
   </table>

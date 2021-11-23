@@ -12,12 +12,14 @@ create table board (
 	wDate    datetime default now(),  /* 글쓴 날짜(기본값:현재날짜/시간) */
 	readNum  int default 0,						/* 글 조회수 */
 	hostIp	 varchar(50) not null,		/* 접속 IP주소 */
-	goods		 int  default 0,					/* 좋아요 */
+	good		 int  default 0,					/* 좋아요 */
 	mid			 varchar(20) not null,		/* 회원 아이디(게시글 조회시 사용) */
 	primary  key(idx)									/* 기본키 : 글 고유번호 */
 );
-
+drop table board;
 desc board;
+
+alter table board change column goods good int default 0;
 
 insert into board values (default,'관리맨','게시판 서비스를 시작합니다.','cjsk1126@naver.com','blog.daum.net/cjsk1126','이곳은 게시판입니다. 좋은글 많이 부탁드려요',default,default,'218.236.203.146',default,'admin');
 

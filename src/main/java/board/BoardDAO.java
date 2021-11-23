@@ -38,7 +38,7 @@ public class BoardDAO {
 				vo.setwDate(rs.getString("wDate"));
 				vo.setReadNum(rs.getInt("readNum"));
 				vo.setHostIp(rs.getString("hostIp"));
-				vo.setGoods(rs.getInt("goods"));
+				vo.setGood(rs.getInt("good"));
 				vo.setMid(rs.getString("mid"));
 				
 				vos.add(vo);
@@ -49,6 +49,28 @@ public class BoardDAO {
 			getConn.rsClose();
 		}
 		return vos;
+	}
+
+	public int setBoInput(BoardVO vo) {
+		int res = 0;
+		try {
+			sql = "insert into board values (default,?,?,?,?,?,default,default,?,default,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getNickName());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getHomePage());
+			pstmt.setString(5, vo.getContent());
+			pstmt.setString(6, vo.getHostIp());
+			pstmt.setString(7, vo.getMid());
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
 	}
 	
 }

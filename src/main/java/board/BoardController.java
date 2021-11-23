@@ -37,6 +37,11 @@ public class BoardController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/boInput.jsp";
 		}
+		else if(com.equals("/boInputOk")) {
+			command = new BoInputOkCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
