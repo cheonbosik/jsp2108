@@ -9,7 +9,20 @@
   <%@ include file="/include/bs4.jsp" %>
   <script>
     function fCheck() {
-    	myform.submit();
+    	var title = myform.title.value;
+    	var content = myform.content.value;
+    	
+    	if(title.trim() == "") {
+    		alert("게시글 제목을 입력하세요");
+    		myform.title.focus();
+    	}
+    	else if(content.trim() == "") {
+    		alert("글내용을 입력하세요");
+    		myform.content.focus();
+    	}
+    	else {
+    		myform.submit();
+    	}
     }
   </script>
 </head>

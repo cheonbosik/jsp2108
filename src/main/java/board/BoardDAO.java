@@ -20,11 +20,13 @@ public class BoardDAO {
 	BoardVO vo = null;
 
 	// 게시글 전체보기
-	public List<BoardVO> getList() {
+	public List<BoardVO> getBoardList(int startIndexNo, int pageSize) {
 		List<BoardVO> vos = new ArrayList<BoardVO>();
 		try {
-			sql = "select * from board order by idx desc";
+			sql = "select * from board order by idx desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startIndexNo);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -71,6 +73,23 @@ public class BoardDAO {
 			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	// 게시글의 총 건수 구해오기
+	public int totRecCnt() {
+		int totRecCnt = 0;
+		try {
+			sql = "select count(*) from board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totRecCnt;
 	}
 	
 }

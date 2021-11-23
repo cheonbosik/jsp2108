@@ -164,7 +164,7 @@
 			[<a href="gList.jsp?pag=<%=(curBlock-1)*blockSize + 1%>">이전블록</a>]
 <% } %>
 <%
-  for(int i=(curBlock*blockSize)+1; i<=(curBlock*blockSize)+blockSize; i++) {
+  for(int i=(curBlock*blockSize)+1; i<=(curBlock*blockSize)+1; i++) {
   	if(i>totPage) break;
   	if(i == pag) out.println("<a href='gList.jsp?pag="+i+"'><font color='red'><b>"+i+"</b></font></a>");
   	else out.println("<a href='gList.jsp?pag="+i+"'>"+i+"</a>");  	
