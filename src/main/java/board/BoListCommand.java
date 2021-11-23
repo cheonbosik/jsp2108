@@ -18,7 +18,7 @@ public class BoListCommand implements BoardInterface {
 		
 		/* 이곳부터 페이징 처리(블록페이지) 변수 지정 시작 */
 	  int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
-	  int pageSize = 5;
+	  int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
 	  int totRecCnt = dao.totRecCnt();
 	  int totPage = (totRecCnt % pageSize)==0 ? totRecCnt/pageSize : (totRecCnt/pageSize) + 1;
 	  int startIndexNo = (pag - 1) * pageSize;
@@ -37,6 +37,7 @@ public class BoListCommand implements BoardInterface {
 		request.setAttribute("blockSize", blockSize);
 		request.setAttribute("curBlock", curBlock);
 		request.setAttribute("lastBlock", lastBlock);
+		request.setAttribute("pageSize", pageSize);
 	}
 
 }

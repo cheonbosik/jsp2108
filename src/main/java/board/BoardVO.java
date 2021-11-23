@@ -13,6 +13,10 @@ public class BoardVO {
 	private int good;
 	private String mid;
 	
+	// 날짜형식필드를 '문자'와 '숫자'로 저장시키기 위한 변수 선언
+	private String wCdate;
+	private int wNdate;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -79,10 +83,22 @@ public class BoardVO {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
+	public String getwCdate() {
+		return wCdate;
+	}
+	public void setwCdate(String wCdate) {
+		this.wCdate = wCdate;
+	}
+	public int getwNdate() {
+		return wNdate;
+	}
+	public void setwNdate(int wNdate) {
+		this.wNdate = wNdate;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", nickName=" + nickName + ", title=" + title + ", email=" + email + ", homePage="
 				+ homePage + ", content=" + content + ", wDate=" + wDate + ", readNum=" + readNum + ", hostIp=" + hostIp
-				+ ", good=" + good + ", mid=" + mid + "]";
+				+ ", good=" + good + ", mid=" + mid + ", wCdate=" + wCdate + ", wNdate=" + wNdate + "]";
 	}
 }
