@@ -173,5 +173,82 @@ public class BoardDAO {
 			getConn.pstmtClose();
 		}
 	}
+
+	public void setGoodUpdate2(int idx, int flag) {
+		try {
+			if(flag == 1) {
+				sql = "update board set good = good + 1 where idx = ?";
+	  	} else {
+				sql = "update board set good = good - 1 where idx = ?";
+		  }
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+
+	// 최근글 갯수 가져오기
+	public int totRecCntLately(int lately) {
+		int totRecCnt = 0;
+		try {
+			sql = "select count(*) from board where date_sub(now(), interval ? day) < wDate";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lately);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totRecCnt;
+	}
+
+	// 최근 게시글 보기...
+	public List<BoardVO> getBoardListLately(int startIndexNo, int pageSize, int lately) {
+		List<BoardVO> vos = new ArrayList<BoardVO>();
+		try {
+			sql = "select * from board where date_sub(now(), interval ? day) < wDate order by idx desc limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lately);
+			pstmt.setInt(2, startIndexNo);
+			pstmt.setInt(3, pageSize);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setTitle(rs.getString("title"));
+				vo.setEmail(rs.getString("email"));
+				vo.setHomePage(rs.getString("homePage"));
+				vo.setContent(rs.getString("content"));
+				
+				// 날짜를 24시간제로 체크하기위해서 사용자정의메소드로 만든 timeDiff()를 사용한다.
+				vo.setwDate(rs.getString("wDate"));   // 만약 wDate가 날짜타입일경우...
+				vo.setwCdate(rs.getString("wDate"));	// 날짜타입 wDate를 문자타입 wCdate로 저장후.
+				TimeDiff timeDiff = new TimeDiff();
+				int res = timeDiff.timeDiff(vo.getwCdate());    // 문자타입 wCdate를 timeDiff()메소드 인자값으로 보내어서 오늘시간과 계산하여 시간차를 돌려받는다.
+				vo.setwNdate(res); 			// 시간차를 숫자형식변수에 저장시켜준다.
+				
+				vo.setReadNum(rs.getInt("readNum"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setGood(rs.getInt("good"));
+				vo.setMid(rs.getString("mid"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
 	
 }

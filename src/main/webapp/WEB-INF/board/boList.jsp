@@ -13,6 +13,17 @@
     	var pageSize = document.getElementById("pageSize").value;
     	location.href = "boList.bo?page=${pag}&pageSize="+pageSize;
     }
+    
+    // 최근게시글 검색
+    function latelyCheck() {
+    	var lately = document.getElementById("lately").value;
+    	if(lately == "") {
+    		alert("최신 검색일자를 선택하세요");
+    	}
+    	else {
+    		location.href="${ctp}/boLately.bo?page=${pag}&pageSize=${pageSize}&lately="+lately;
+    	}
+    }
   </script>
   <style>
     th, td {
@@ -31,7 +42,13 @@
     </tr>
     <tr>
       <td class="text-left p-0">
-        <a href="${ctp}/boInput.bo" class="btn btn-secondary btn-sm">글쓰기</a>
+        <a href="${ctp}/boInput.bo" class="btn btn-secondary btn-sm">글쓰기</a> &nbsp;
+        <select name="lately" id="lately" onchange="latelyCheck()">
+          <option value="0">최근자료순</option>
+          <c:forEach var="i" begin="1" end="30">
+	          <option value="${i}" ${lately==i ? 'selected' : ''}>${i}일전</option>
+          </c:forEach>
+        </select>
       </td>
       <td class="text-right p-0">
         <select name="pageSize" id="pageSize" onchange="pageCheck()" class="p-0 m-0">

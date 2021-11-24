@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 public class BoGoodCommand implements BoardInterface {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));

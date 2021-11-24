@@ -14,6 +14,44 @@
     	var ans = confirm("게시글을 삭제하시겠습니까?");
     	if(ans) location.href="${ctp}/boDelete.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}";
     }
+    
+    // 좋아요 처리 - 1
+    function goodCheck2(flag) {
+    	var query = {
+    			idx : ${vo.idx},
+    			flag: flag
+    	}
+    	
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/boGood2.bo",
+    		data : query,
+    		success:function() {
+    			location.reload();
+    		}
+    	});
+    }
+    
+    // 좋아요 처리 - 2
+    function goodCheck3() {
+    	var query = {
+    			idx : ${vo.idx}
+    	}
+    	
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/boGood3",
+    		data : query,
+    		success:function(data) {
+    			if(data == "1") {
+    				alert("이미 좋아요를 클릭하셨습니다.");
+    			}
+    			else {
+    				location.reload();
+    			}
+    		}
+    	});
+    }
   </script>
   <style>
     th {
@@ -32,7 +70,7 @@
   <table class="table table-bordered">
     <tr>
       <th>글쓴이</th>
-      <td>${vo.nickName} &nbsp;&nbsp;<a href="${ctp}/boGood.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">👍</a>(${vo.good})</td>
+      <td>${vo.nickName} &nbsp;&nbsp;<a href="javascript:goodCheck2(1)">👍</a>&nbsp;<a href="javascript:goodCheck2(-1)">👎</a>(${vo.good})</td>
       <th>글쓴날짜</th>
       <td>${fn:substring(vo.wDate,0,19)}</td>
     </tr>
@@ -57,7 +95,7 @@
     </tr>
     <tr>
       <th>글제목</th>
-      <td colspan="3">${vo.title}</td>
+      <td colspan="3">${vo.title} &nbsp;&nbsp;<a href="javascript:goodCheck3()">😍</a>(${vo.good})</td>
     </tr>
     <tr>
       <th>글내용</th>
