@@ -77,6 +77,11 @@ public class BoardController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/WEB-INF/message/message.jsp";
 		}
+		else if(com.equals("/boSearch")) {
+			command = new BoSearchCommand();
+			command.execute(request, response);
+			viewPage += "/boSearch.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

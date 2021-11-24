@@ -24,6 +24,23 @@
     		location.href="${ctp}/boList.bo?page=${pag}&pageSize=${pageSize}&lately="+lately;
     	}
     }
+    
+    // 검색콤보상자 선택시 커서를 검색어 입력창으로 이동하기
+    function searchChange() {
+    	searchForm.searchString.focus();
+    }
+    
+    // 검색버튼 클릭시 수행할 내용.
+    function searchCheck() {
+    	var searchString = searchForm.searchString.value;
+    	if(searchString == "") {
+    		alert("검색어를 입력하세요?");
+    		searchForm.searchString.focus();
+    	}
+    	else {
+    		searchForm.submit();
+    	}
+    }
   </script>
   <style>
     th, td {
@@ -159,6 +176,23 @@
 </div>
 <!-- 블록 페이징처리 끝 -->
 --%>
+
+<!-- 검색기 처리 시작 -->
+<div class="container text-center">
+  <form name="searchForm" method="post" action="${ctp}/boSearch.bo">
+    <b>검색 : </b>
+    <select name="search" onchange="searchChange()">
+      <option value="title">글제목</option>
+      <option value="nickName">글쓴이</option>
+      <option value="content">글내용</option>
+    </select>
+    <input type="text" name="searchString"/>
+    <input type="button" value="검색" onclick="searchCheck()"/>
+    <input type="hidden" name="pag" value="${pag}"/>
+	  <input type="hidden" name="pageSize" value="${pageSize}"/>
+  </form>
+</div>
+<!-- 검색기 처리 끝 -->
 </div>
 <br/>
 <%@ include file="/include/footer.jsp" %>

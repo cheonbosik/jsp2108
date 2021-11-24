@@ -91,7 +91,7 @@
     </tr>
     <tr>
       <th>좋아요</th>
-      <td colspan="3"><a href="${ctp}/boGood.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">❤</a>(${vo.good})</td>
+      <td colspan="3"><a href="${ctp}/boGood.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&sw=search">❤</a>(${vo.good})</td>
     </tr>
     <tr>
       <th>글제목</th>
@@ -103,28 +103,36 @@
     </tr>
     <tr>
       <td colspan="4" class="text-center">
-        <input type="button" value="돌아가기" onclick="location.href='${ctp}/boList.bo?pag=${pag}&pageSize=${pageSize}';"/>
-        <c:if test="${sMid == vo.mid}">
-          <input type="button" value="수정하기" onclick="location.href='${ctp}/boUpdate.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}';"/>
-          <input type="button" value="삭제하기" onclick="delCheck()"/>
+        <c:if test="${sw != 'search'}">
+	        <input type="button" value="돌아가기" onclick="location.href='${ctp}/boList.bo?pag=${pag}&pageSize=${pageSize}';"/>
+	        <c:if test="${sMid == vo.mid}">
+	          <input type="button" value="수정하기" onclick="location.href='${ctp}/boUpdate.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}';"/>
+	          <input type="button" value="삭제하기" onclick="delCheck()"/>
+	        </c:if>
+        </c:if>
+        <c:if test="${sw == 'search'}">
+        	<input type="button" value="돌아가기" onclick="history.back()"/>
         </c:if>
       </td>
     </tr>
   </table>
   <br/>
+  
+  <c:if test="${sw != 'search'}">
   <!-- 이전글/다음글 처리 -->
-  <table class="table table-borderless">
-    <tr>
-      <td>
-        <c:if test="${nextVO.nextIdx != 0}">
-	        👆 <a href="${ctp}/boContent.bo?idx=${nextVO.nextIdx}&pag=${pag}&pageSize=${pageSize}">다음글 : ${nextVO.nextTitle}</a><br/>
-        </c:if>
-        <c:if test="${preVO.preIdx != 0}">
-	        👇 <a href="${ctp}/boContent.bo?idx=${preVO.preIdx}&pag=${pag}&pageSize=${pageSize}">이전글 : ${preVO.preTitle}</a><br/>
-        </c:if>
-      </td>
-    </tr>
-  </table>
+	  <table class="table table-borderless">
+	    <tr>
+	      <td>
+	        <c:if test="${nextVO.nextIdx != 0}">
+		        👆 <a href="${ctp}/boContent.bo?idx=${nextVO.nextIdx}&pag=${pag}&pageSize=${pageSize}">다음글 : ${nextVO.nextTitle}</a><br/>
+	        </c:if>
+	        <c:if test="${preVO.preIdx != 0}">
+		        👇 <a href="${ctp}/boContent.bo?idx=${preVO.preIdx}&pag=${pag}&pageSize=${pageSize}">이전글 : ${preVO.preTitle}</a><br/>
+	        </c:if>
+	      </td>
+	    </tr>
+	  </table>
+  </c:if>
 </div>
 <br/>
 <%@ include file="/include/footer.jsp" %>

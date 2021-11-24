@@ -16,6 +16,10 @@ public class BoContentCommand implements BoardInterface {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		// 검색폼에서 값이 넘어올경우...
+		String sw = request.getParameter("sw")==null ? "" : request.getParameter("sw");
+		request.setAttribute("sw", sw);
 
 		BoardDAO dao = new BoardDAO();
 		
