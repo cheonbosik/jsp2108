@@ -23,4 +23,9 @@ alter table board change column goods good int default 0;
 
 insert into board values (default,'관리맨','게시판 서비스를 시작합니다.','cjsk1126@naver.com','blog.daum.net/cjsk1126','이곳은 게시판입니다. 좋은글 많이 부탁드려요',default,default,'218.236.203.146',default,'admin');
 
+/* 이전글 / 다음글 연습 */
+select * from board where idx = 20;
+select * from board where idx < 20 order by idx desc limit 1;	/* 이전글 */
+select * from board where idx > 20 limit 1;		/* 다음글 */
+
 select * from board order by idx desc;

@@ -33,11 +33,17 @@ public class BoContentCommand implements BoardInterface {
 			contentIdx.add(imsiContentIdx);
 		}
 		
-		BoardVO vo = dao.getBoardContent(idx);
+		BoardVO vo = dao.getBoardContent(idx);  // vo : 현재글을 저장
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("pag", pag);
 		request.setAttribute("pageSize", pageSize);
+		
+		// '이전글(preVO)'/'다음글(nextVO)' 처리하기
+		BoardVO preVO  = dao.preNextSearch("pre", idx); 	// 이전글 처리
+		BoardVO nextVO = dao.preNextSearch("next",idx); 	// 다음글 처리
+		request.setAttribute("preVO" , preVO);
+		request.setAttribute("nextVO", nextVO);
 	}
 
 }

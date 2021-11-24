@@ -111,6 +111,20 @@
       </td>
     </tr>
   </table>
+  <br/>
+  <!-- 이전글/다음글 처리 -->
+  <table class="table table-borderless">
+    <tr>
+      <td>
+        <c:if test="${nextVO.nextIdx != 0}">
+	        👆 <a href="${ctp}/boContent.bo?idx=${nextVO.nextIdx}&pag=${pag}&pageSize=${pageSize}">다음글 : ${nextVO.nextTitle}</a><br/>
+        </c:if>
+        <c:if test="${preVO.preIdx != 0}">
+	        👇 <a href="${ctp}/boContent.bo?idx=${preVO.preIdx}&pag=${pag}&pageSize=${pageSize}">이전글 : ${preVO.preTitle}</a><br/>
+        </c:if>
+      </td>
+    </tr>
+  </table>
 </div>
 <br/>
 <%@ include file="/include/footer.jsp" %>

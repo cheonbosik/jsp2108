@@ -272,5 +272,40 @@ public class BoardDAO {
 		}
 		return res;
 	}
+
+	// 이전글/다음글 처리하기
+	public BoardVO preNextSearch(String str, int idx) {
+		vo = new BoardVO();
+		try {
+			if(str.equals("pre")) {
+				sql = "select * from board where idx < ? order by idx desc limit 1";
+			}
+			else {
+				sql = "select * from board where idx > ? limit 1";
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(str.equals("pre") && rs.next()) {
+				vo.setPreIdx(rs.getInt("idx"));
+				vo.setPreTitle(rs.getString("title"));
+			}
+			else if(str.equals("next") && rs.next()) {
+				vo.setNextIdx(rs.getInt("idx"));
+				vo.setNextTitle(rs.getString("title"));
+			}
+			else {
+				vo.setPreIdx(0);
+				vo.setNextIdx(0);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vo;
+	}
 	
 }
