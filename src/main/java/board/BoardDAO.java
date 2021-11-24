@@ -250,5 +250,27 @@ public class BoardDAO {
 		}
 		return vos;
 	}
+
+	// 게시글 수정처리
+	public int setBoUpdateOk(BoardVO vo) {
+		int res = 0;
+		try {
+			sql = "update board set title=?,email=?,homePage=?,content=?,hostIp=? where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getHomePage());
+			pstmt.setString(4, vo.getContent());
+			pstmt.setString(5, vo.getHostIp());
+			pstmt.setInt(6, vo.getIdx());
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
 	
 }

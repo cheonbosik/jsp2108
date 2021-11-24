@@ -105,7 +105,7 @@
       <td colspan="4" class="text-center">
         <input type="button" value="돌아가기" onclick="location.href='${ctp}/boList.bo?pag=${pag}&pageSize=${pageSize}';"/>
         <c:if test="${sMid == vo.mid}">
-          <input type="button" value="수정하기" onclick="location.href='';"/>
+          <input type="button" value="수정하기" onclick="location.href='${ctp}/boUpdate.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}';"/>
           <input type="button" value="삭제하기" onclick="delCheck()"/>
         </c:if>
       </td>

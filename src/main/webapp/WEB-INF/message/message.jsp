@@ -30,6 +30,8 @@
   	else if(msg == "boInputNo") msg = "게시글이 등록 실패~~~";
   	else if(msg == "boDeleteOk") msg = "게시글이 삭제 되었습니다.";
   	else if(msg == "boDeleteNo") msg = "게시글이 삭제 실패~~~";
+  	else if(msg == "boUpdateOk") msg = "게시글이 수정되었습니다.";
+  	else if(msg == "boUpdateNo") msg = "게시글 수정실패~~~";
   	
     alert(msg);
     if(url != "") location.href = url;

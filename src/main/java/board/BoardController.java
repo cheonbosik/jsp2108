@@ -67,11 +67,16 @@ public class BoardController extends HttpServlet {
 			dao.setGoodUpdate2(idx,flag);
 			return;
 		}
-//		else if(com.equals("/boLately")) {
-//			command = new BoListCommand();
-//			command.execute(request, response);
-//			viewPage += "/boList.jsp";
-//		}
+		else if(com.equals("/boUpdate")) {
+			command = new BoUpdateCommand();
+			command.execute(request, response);
+			viewPage += "/boUpdate.jsp";
+		}
+		else if(com.equals("/boUpdateOk")) {
+			command = new BoUpdateOkCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
