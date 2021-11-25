@@ -17,7 +17,7 @@ public class BoReplyUpdateCommand implements BoardInterface {
 		int lately = request.getParameter("lately")==null? 0 : Integer.parseInt(request.getParameter("lately"));
 		
 		BoardDAO dao = new BoardDAO();
-		ReplyBoardVO replyBoardVO = dao.getReply(idx);
+		//ReplyBoardVO replyBoardVO = dao.getReply(idx);
 		
 		request.setAttribute("msg", "replyBoardUpdateOk");
 		request.setAttribute("url", request.getContextPath()+"/boContent.bo?idx="+boardIdx+"&pag="+pag+"&pageSize="+pageSize+"&lately="+lately);

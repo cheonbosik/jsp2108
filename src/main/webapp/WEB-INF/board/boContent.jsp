@@ -64,6 +64,64 @@
     		replyForm.submit();
     	}
     }
+    
+    // 댓글 수정처리(보류.......)
+    function boReplyUpdate(replyIdx) {
+    	var query = {
+    			idx 			: ${vo.idx},
+    			pag 			: ${pag},
+    			pageSize 	: ${pageSize},
+    			lately 		: ${lately},
+    			replyIdx 	: replyIdx
+    	}
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/boContent.bo",
+    		data : query,
+    		success:function(data) {
+    			alert("content :" + data);
+    			replyForm.content.value = data;
+    		}
+    	});
+    }
+    
+    // 댓글 수정처리(aJax처리)
+    function replyUpdateCheck(replyIdx) {
+    	var content = $("#content").val();
+    	var hostIp = '${pageContext.request.remoteAddr}';
+    	query = {
+    			replyIdx : replyIdx,
+    			content  : content,
+    			hostIp   : hostIp
+    	}
+    	
+    	$.ajax({
+    		type  : "post",
+    		url   : "${ctp}/boReplyUpdateOk.bo",
+    		data  : query,
+    		success:function() {
+    			alert("댓글이 수정처리 되었습니다.");
+    			location.href = "${ctp}/boContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&lately=${lately}";
+    		}
+    	});
+    }
+    
+    // 댓글 삭제
+    function replyDelCheck(replyIdx) {
+    	var query = {replyIdx : replyIdx};
+    	var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+    	if(!ans) return false;
+    	
+    	$.ajax({
+    		type  : "get",
+    		url   : "${ctp}/boReplyDelete.bo",
+    		data  : query,
+    		success:function() {
+    			alert("삭제처리 되었습니다.");
+    			location.reload();
+    		}
+    	});
+    }
   </script>
   <style>
     th {
@@ -159,7 +217,8 @@
       <tr>
         <td class="text-center">${replyVO.nickName}<br/>
           <c:if test="${sMid == replyVO.mid}">
-           <font size="2">(<a href="${ctp}/boReplyUpdate.bo?boardIdx=${vo.idx}&idx=${replyVO.idx}&pag=${pag}&pageSize=${pageSize}&lately=${lately}">수정</a>/<a href="">삭제</a>)</font>
+           <font size="2">(<a href="${ctp}/boContent.bo?replyIdx=${replyVO.idx}&idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&lately=${lately}">수정</a>/<a href="javascript:replyDelCheck(${replyVO.idx})">삭제</a>)</font>
+           <%-- <font size="2">(<a href="javascript:boReplyUpdate(${replyVO.idx})">수정</a>/<a href="">삭제</a>)</font> --%>
           </c:if>
         </td>
         <td>${fn:replace(replyVO.content,newLine,'<br/>')}</td>
@@ -174,11 +233,14 @@
 	  	<tr>
 	  	  <td style="width:90%">
 	  	    글내용 :
-	  	    <textarea rows="4" name="content" id="content" class="form-control"></textarea>
+	  	    <textarea rows="4" name="content" id="content" class="form-control">${replyContent}</textarea>
 	  	  </td>
 	  	  <td style="width:10%">
 	  	    <br/><p>작성자 :<br/>${sNickName}</p>
-	  	    <p><input type="button" value="댓글달기" onclick="replyCheck()"/></p>
+	  	    <p>
+	  	      <c:if test="${empty replyContent}"><input type="button" value="댓글달기" onclick="replyCheck()"/></c:if>
+	  	      <c:if test="${!empty replyContent}"><input type="button" value="댓글수정" onclick="replyUpdateCheck(${replyIdx})"/></c:if>
+	  	    </p>
 	  	  </td>
 	  	</tr>
 	  </table>

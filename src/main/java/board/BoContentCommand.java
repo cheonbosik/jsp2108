@@ -1,6 +1,7 @@
 package board;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,19 @@ public class BoContentCommand implements BoardInterface {
 		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
 		int lately = request.getParameter("lately")==null ? 0 : Integer.parseInt(request.getParameter("lately"));
 		
-		
 		// 검색폼에서 값이 넘어올경우...
 		String sw = request.getParameter("sw")==null ? "" : request.getParameter("sw");
 		request.setAttribute("sw", sw);
 
 		BoardDAO dao = new BoardDAO();
+		
+		// 댓글 수정시에 처리부분...
+		int replyIdx = request.getParameter("replyIdx")==null ? 0 : Integer.parseInt(request.getParameter("replyIdx"));
+		if(replyIdx != 0) {
+			String replyContent = dao.getReply(replyIdx);
+			request.setAttribute("replyIdx", replyIdx);
+			request.setAttribute("replyContent", replyContent);
+		}
 		
 		// 조회수 증가처리(조회수 중복방지)
 		// 세션배열(객체배열:ArrayList()) : 고유세션아이디 + 'board' + '현재글의 고유번호'

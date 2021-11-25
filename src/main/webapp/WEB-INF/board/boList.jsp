@@ -11,7 +11,7 @@
   <script>
     function pageCheck() {
     	var pageSize = document.getElementById("pageSize").value;
-    	location.href = "boList.bo?page=${pag}&pageSize="+pageSize;
+    	location.href = "boList.bo?pag=${pag}&pageSize="+pageSize;
     }
     
     // 최근게시글 검색
