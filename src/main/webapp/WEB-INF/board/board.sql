@@ -29,3 +29,21 @@ select * from board where idx < 20 order by idx desc limit 1;	/* 이전글 */
 select * from board where idx > 20 limit 1;		/* 다음글 */
 
 select * from board order by idx desc;
+
+
+/*--------------------댓글처리---------------------------*/
+create table replyBoard (
+  idx				int not null auto_increment primary key,	/* 댓글의 고유번호 */
+  boardIdx	int not null,							/* 원본글의 고유번호(외래키지정) */
+  mid				varchar(20) not null,			/* 올린이의 아이디 */
+  nickName	varchar(20) not null,			/* 올린이의 닉네임 */
+  wDate			datetime		default now(),/* 댓글 기록 날짜 */
+  hostIp		varchar(50) not null,			/* 댓글쓴 PC의 IP */
+  content		text				not null,			/* 댓글 내용 */
+  foreign key(boardIdx) references board(idx) 
+  on update cascade 
+  on delete restrict
+);
+desc replyBoard;
+
+select * from replyBoard order by idx desc;

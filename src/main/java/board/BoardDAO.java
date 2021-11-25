@@ -19,6 +19,7 @@ public class BoardDAO {
 	private String sql = "";
 	
 	BoardVO vo = null;
+	ReplyBoardVO replyVO = null;
 
 	// 게시글 전체보기
 	public List<BoardVO> getBoardList(int startIndexNo, int pageSize) {
@@ -366,6 +367,73 @@ public class BoardDAO {
 			getConn.rsClose();
 		}
 		return vos;
+	}
+
+	// 댓글 입력처리
+	public void replyInput(ReplyBoardVO vo) {
+		try {
+			sql = "insert into replyBoard values (default,?,?,?,default,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getBoardIdx());
+			pstmt.setString(2, vo.getMid());
+			pstmt.setString(3, vo.getNickName());
+			pstmt.setString(4, vo.getHostIp());
+			pstmt.setString(5, vo.getContent());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+
+	// 댓글 내용 가져오기
+	public List<ReplyBoardVO> getReplyBoard(int idx) {
+		List<ReplyBoardVO> replyBoardVOS = new ArrayList<ReplyBoardVO>();
+		try {
+			sql = "select * from replyBoard where boardIdx = ? order by idx desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				replyVO = new ReplyBoardVO();
+				
+				replyVO.setIdx(rs.getInt("idx"));
+				replyVO.setBoardIdx(idx);
+				replyVO.setMid(rs.getString("mid"));
+				replyVO.setNickName(rs.getString("nickName"));
+				replyVO.setwDate(rs.getString("wDate"));
+				replyVO.setHostIp(rs.getString("hostIp"));
+				replyVO.setContent(rs.getString("content"));
+				
+				replyBoardVOS.add(replyVO);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return replyBoardVOS;
+	}
+
+	// 댓글 수정을 위한 댓글내역 가져오기
+	public ReplyBoardVO getReply(int idx) {
+		replyVO = new ReplyBoardVO(); 
+		try {
+			sql = "select * from replyBoard where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			replyVO.setContent(rs.getString("content"));
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return replyVO;
 	}
 	
 }

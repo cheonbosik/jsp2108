@@ -17,7 +17,7 @@ public class AdminDAO {
 	
 	private String sql = "";
 	
-	MemberVO vo = null;
+	MemberVO memberVO = null;
 
 	// 회원 등급 변경처리
 	public void setMemberLevelChange(int idx, int level) {

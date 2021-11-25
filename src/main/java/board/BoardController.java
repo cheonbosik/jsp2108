@@ -62,7 +62,6 @@ public class BoardController extends HttpServlet {
 			// 아래는 중복처리를 하지 않았기에 좋아요수가 '증가/감소' 를 계속하게 된다.
 			int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 			int flag = request.getParameter("flag")==null ? 0 : Integer.parseInt(request.getParameter("flag"));
-			System.out.println("flag : " + flag);
 			BoardDAO dao = new BoardDAO();
 			dao.setGoodUpdate2(idx,flag);
 			return;
@@ -81,6 +80,16 @@ public class BoardController extends HttpServlet {
 			command = new BoSearchCommand();
 			command.execute(request, response);
 			viewPage += "/boSearch.jsp";
+		}
+		else if(com.equals("/boReplyInput")) {
+			command = new BoReplyInputCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
+		}
+		else if(com.equals("/boReplyUpdate")) {
+			command = new BoReplyUpdateCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

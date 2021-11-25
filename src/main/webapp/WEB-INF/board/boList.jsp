@@ -90,7 +90,7 @@
 	    <tr>
 	      <td>${curScrStrarNo}</td>
 	      <td>
-	        <a href="${ctp}/boContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
+	        <a href="${ctp}/boContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&lately=${lately}">${vo.title}</a>
 	        <c:if test="${vo.wNdate <= 24}"><img src="${ctp}/images/new.gif"/></c:if>
 	      </td>
 	      <td>${vo.nickName}</td>
