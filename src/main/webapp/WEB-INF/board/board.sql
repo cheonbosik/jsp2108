@@ -47,3 +47,5 @@ create table replyBoard (
 desc replyBoard;
 
 select * from replyBoard order by idx desc;
+
+select count(*) from replyBoard where boardIdx = 33;

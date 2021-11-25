@@ -15,7 +15,10 @@
   <hr/>
   <p><a href="${ctp}/adMemberList.ad?level=1">새로운 가입자(<font color="red"><b>${newMember}</b></font> 건)</a></p>  <!-- 준회원이 있을경우 인원출력 -->
   <hr/>
-  <p><a href="#">최근 게시글(<font color="red"><b>xx</b></font> 건)</a></p>	<!-- 최근 게시글 5건 보기 -->
+  <p>
+   <a href="#">최근 게시글(<font color="red"><b>xx</b></font> 건)</a>	<!-- 최근 게시글 보기 -->
+   <a href="#">최근 게시글(댓글)(<font color="red"><b>xx</b></font> 건)</a>	<!-- 최근 게시글 댓글 보기 -->
+  </p>
   <hr/>
   <p><a href="#">문의사항(<font color="red"><b>xx</b></font> 건)</a></p>
   <hr/>

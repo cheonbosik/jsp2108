@@ -23,6 +23,7 @@
   <h6><a href="${ctp}/adContent.ad" target="adContent">관리자메뉴</a></h6>
   <hr/>
   <p><a href="${ctp}/adMemberList.ad" target="adContent">회원관리</a></p>
+  <p><a href="${ctp}/adBoardList.ad" target="adContent">게시판관리</a></p>
   <hr/>
   <p><a href="<%=request.getContextPath()%>/" target="_top">홈으로</a></p>
   <p><a href="javascript:logoutCheck()">로그아웃</a></p>

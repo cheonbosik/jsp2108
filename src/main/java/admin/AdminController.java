@@ -10,6 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.board.AdBoardListCommand;
+import admin.member.AdContentCommand;
+import admin.member.AdMemberInforCommand;
+import admin.member.AdMemberLevelCommand;
+import admin.member.AdMemberListCommand;
+import admin.member.AdMemberResetCommand;
+
 @WebServlet("*.ad")
 public class AdminController extends HttpServlet {
 	@Override
@@ -66,6 +73,11 @@ public class AdminController extends HttpServlet {
 			command = new AdMemberResetCommand();
 			command.execute(request, response);
 			viewPage = "/WEB-INF/message/message.jsp";
+		}
+		else if(com.equals("/adBoardList")) {
+			command = new AdBoardListCommand();
+			command.execute(request, response);
+			viewPage += "/board/adBoardList.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
