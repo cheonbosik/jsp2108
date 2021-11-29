@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import study.pdsTest.UpLoad1OkCommand;
+import study.pdsTest.UpLoad2OkCommand;
 
 @WebServlet("*.st")
 public class StudyController extends HttpServlet {
@@ -69,6 +70,17 @@ public class StudyController extends HttpServlet {
 			command = new DownLoad1Command();
 			command.execute(request, response);
 			viewPage += "/pdsTest/downLoad1.jsp";
+		}
+		else if(com.equals("/pdsTest2")) {
+			viewPage += "/pdsTest/upLoad2.jsp";
+		}
+		else if(com.equals("/upLoad2Ok")) {
+			command = new UpLoad2OkCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
+		}
+		else if(com.equals("/pdsTest3")) {
+			viewPage += "/pdsTest/upLoad3.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

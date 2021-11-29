@@ -42,13 +42,15 @@
           	<a href="${ctp}/data/pdsTest/${file}" download="${file}">${file}</a>
           </c:if>
         </td>
-        <td><a href="${ctp}/fileDelete.st" class="btn btn-secondary btn-sm">삭제</a></td>
+        <td><a href="${ctp}/fileDelete?file=${file}" class="btn btn-secondary btn-sm">삭제</a></td>
       </tr>
     </c:forEach>
   </table>
   <hr/>
-  <div>
-    <a href="${ctp}/pdsTest1.st" class="btn btn-secondary">돌아가기</a>
+  <div class="row">
+    <div class="col"><a href="${ctp}/pdsTest1.st" class="btn btn-secondary form-control">싱글파일 업로드폼으로 돌아가기</a></div>
+    <div class="col"><a href="${ctp}/pdsTest2.st" class="btn btn-secondary form-control">멀티파일 업로드폼1으로 돌아가기</a></div>
+    <div class="col"><a href="${ctp}/pdsTest3.st" class="btn btn-secondary form-control">멀티파일 업로드폼2으로 돌아가기</a></div>
   </div>
 </div>
 <br/>

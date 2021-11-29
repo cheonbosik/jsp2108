@@ -43,7 +43,7 @@
 <jsp:include page="/include/nav.jsp"/>
 <p><br></p>
 <div class="container">
-  <h2>파일 업로드 테스트 1</h2>
+  <h2>파일 업로드 테스트 1(싱글파일처리)</h2>
   <p>cos라이브러리를 이용한 파일 업로드</p>
   <hr/>
   <br/>
