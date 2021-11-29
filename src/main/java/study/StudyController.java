@@ -65,6 +65,11 @@ public class StudyController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/WEB-INF/message/message.jsp";
 		}
+		else if(com.equals("/downLoad1")) {
+			command = new DownLoad1Command();
+			command.execute(request, response);
+			viewPage += "/pdsTest/downLoad1.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
