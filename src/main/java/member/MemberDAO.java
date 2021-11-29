@@ -75,7 +75,7 @@ public class MemberDAO {
 	public int setMemberJoinOk(MemberVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into member values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,default,?,?,default,default,default,default,default,default,default)";
+			sql = "insert into member values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default,default,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getPwd());
@@ -90,8 +90,9 @@ public class MemberDAO {
 			pstmt.setString(11, vo.getHomePage());
 			pstmt.setString(12, vo.getJob());
 			pstmt.setString(13, vo.getHobby());
-			pstmt.setString(14, vo.getContent());
-			pstmt.setString(15, vo.getUserInfor());
+			pstmt.setString(14, vo.getPhoto());
+			pstmt.setString(15, vo.getContent());
+			pstmt.setString(16, vo.getUserInfor());
 			pstmt.executeUpdate();
 			res = 1;
 		} catch (SQLException e) {
@@ -133,6 +134,7 @@ public class MemberDAO {
 				vo.setHobby(rs.getString("hobby"));
 				vo.setContent(rs.getString("content"));
 				vo.setUserInfor(rs.getString("userInfor"));
+				vo.setPhoto(rs.getString("photo"));
 			}
 			else {
 				vo = null;

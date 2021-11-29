@@ -301,6 +301,10 @@
 			  </label>
 			</div>
     </div>
+    <div  class="form-group">
+      회원 사진(파일용량:2MByte이내) : <a href="<%=request.getContextPath()%>/data/member/<%=vo.getPhoto()%>" target="_blank"><img src="<%=request.getContextPath()%>/data/member/<%=vo.getPhoto()%>" width="80px"/></a>
+      <input type="file" name="fName" id="file" class="form-control-file border"/>
+    </div>
     <button type="button" class="btn btn-secondary" onclick="fCheck()">회원정보수정</button>
     <button type="reset" class="btn btn-secondary">다시작성</button>
     <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/memMain.mem';">돌아가기</button>
