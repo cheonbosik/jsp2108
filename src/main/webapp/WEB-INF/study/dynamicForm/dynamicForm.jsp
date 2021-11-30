@@ -51,8 +51,10 @@
 	function textView() {
 		str = "";
 		for(var i=1; i<=cnt; i++) {
-			var product = 'product' + i; 
-			str += document.getElementById(product).value + "/";
+			var product = 'product' + i;
+			if(document.getElementById(product) != null) {
+				str += document.getElementById(product).value + "/";
+			}
 		}
 		alert(str);
 	}

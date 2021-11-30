@@ -50,7 +50,7 @@
     	  <td>${vo.fDate}</td>
     	  <td>${vo.fName}</td>
     	  <td>${vo.downNum}</td>
-    	  <td><a href="#" class="btn btn-outline-secondary btn-sm">삭제</a></td>
+    	  <td><a href="#" class="btn btn-outline-secondary">삭제</a></td>
     	</tr>
     </c:forEach>
   </table>
