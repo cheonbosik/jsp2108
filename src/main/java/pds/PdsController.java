@@ -35,6 +35,11 @@ public class PdsController extends HttpServlet {
 		else if(com.equals("/pdsInput")) {
 			viewPage += "/pdsInput.jsp";
 		}
+		else if(com.equals("/pdsInputOk")) {
+			command = new PdsInputOkCommand();
+			command.execute(request, response);
+			viewPage = "/WEB-INF/message/message.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

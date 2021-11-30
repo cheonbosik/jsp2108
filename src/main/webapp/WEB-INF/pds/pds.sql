@@ -18,5 +18,6 @@ create table pds (
 );
 
 desc pds;
+delete from pds;
 
 select * from pds order by idx desc;

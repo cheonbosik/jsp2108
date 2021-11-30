@@ -45,7 +45,6 @@
     	var fileSize = 0;
     	for(var i=1; i<=cnt; i++) {
     		fName = "fName" + i;
-    		/* if(document.getElementById(fName).value != "" && document.getElementById(fName).value != null) { */
     		if(document.getElementById(fName) != null) {
 	    		if(document.getElementById(fName).value != "" && document.getElementById(fName).value != null) {
 	    			tempFname = document.getElementById(fName).value;
@@ -109,8 +108,8 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="openSw">공개여부 : </label>
-	    <input type="radio" name="openSw" id="openSw" value="공개" checked/>공개 &nbsp;&nbsp;
-	    <input type="radio" name="openSw" id="openSw" value="비공개"/>비공개
+	    <input type="radio" name="openSw" value="공개" checked/>공개 &nbsp;&nbsp;
+	    <input type="radio" name="openSw" value="비공개"/>비공개
 	  </div>
 	  <div class="form-group">
 	    <label for="pwd">비밀번호 : </label>

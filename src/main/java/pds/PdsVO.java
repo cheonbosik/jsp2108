@@ -15,6 +15,10 @@ public class PdsVO {
 	private String openSw;
 	private String content;
 	
+	//날짜형식필드를 '문자'와 '숫자'로 저장시키기 위한 변수 선언
+	private String wCdate;
+	private int wNdate;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -93,10 +97,23 @@ public class PdsVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getwCdate() {
+		return wCdate;
+	}
+	public void setwCdate(String wCdate) {
+		this.wCdate = wCdate;
+	}
+	public int getwNdate() {
+		return wNdate;
+	}
+	public void setwNdate(int wNdate) {
+		this.wNdate = wNdate;
+	}
 	@Override
 	public String toString() {
 		return "PdsVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", fName=" + fName + ", fSName=" + fSName
 				+ ", fSize=" + fSize + ", title=" + title + ", part=" + part + ", pwd=" + pwd + ", fDate=" + fDate
-				+ ", downNum=" + downNum + ", openSw=" + openSw + ", content=" + content + "]";
+				+ ", downNum=" + downNum + ", openSw=" + openSw + ", content=" + content + ", wCdate=" + wCdate + ", wNdate="
+				+ wNdate + "]";
 	}
 }
