@@ -26,7 +26,7 @@
         <a class="nav-link" href="<%=request.getContextPath()%>/boList.bo">BOARD</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">PDS</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/pdsList.pds">PDS</a>
       </li>
       <li class="nav-item dropdown mr-2">
         <a class="nav-link btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Study</a>
@@ -35,6 +35,7 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping.url">URL(확장자)매핑</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/URLMapping.url2">URL(확장자)매핑2</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/password">비밀번호암호화</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/shaTest.st">SHA 암호화</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/el1.st">EL학습1</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/el2.st">EL학습2</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/jstl1.st">JSTL학습1</a>
@@ -50,6 +51,7 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/pdsTest1.st">PDS연습</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/pdsTest2.st">PDS연습2</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/pdsTest3.st">PDS연습3</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/dynamicForm.st">동적폼연습</a>
 		    </div>
       </li>
 <%    } %>

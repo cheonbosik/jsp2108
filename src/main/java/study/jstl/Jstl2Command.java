@@ -1,10 +1,12 @@
-package study;
+package study.jstl;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import study.StudyInterface;
 
 public class Jstl2Command implements StudyInterface {
 

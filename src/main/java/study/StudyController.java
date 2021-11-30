@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import password.ShaTestOkCommand;
+import study.ajax.Ajax1Command;
+import study.jstl.Jstl2Command;
+import study.pdsTest.DownLoad1Command;
+import study.pdsTest.FileDeleteCommand;
 import study.pdsTest.UpLoad1OkCommand;
 import study.pdsTest.UpLoad2OkCommand;
 
@@ -81,6 +86,22 @@ public class StudyController extends HttpServlet {
 		}
 		else if(com.equals("/pdsTest3")) {
 			viewPage += "/pdsTest/upLoad3.jsp";
+		}
+		else if(com.equals("/fileDelete")) {
+			command = new FileDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/dynamicForm")) {
+			viewPage += "/dynamicForm/dynamicForm.jsp";
+		}
+		else if(com.equals("/shaTest")) {
+			viewPage += "/password/shaTest.jsp";
+		}
+		else if(com.equals("/shaTestOk")) {
+			command = new ShaTestOkCommand();
+			command.execute(request, response);
+			return;
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

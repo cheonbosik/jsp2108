@@ -1,4 +1,4 @@
-package study;
+package study.pdsTest;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import study.StudyInterface;
 
 public class DownLoad1Command implements StudyInterface {
 

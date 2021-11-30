@@ -31,7 +31,6 @@ public class UpLoad2OkCommand implements StudyInterface {
 			file = (String) fileNames.nextElement();
 			originalFileName = multipartRequest.getOriginalFileName(file);
 			fileSystemName = multipartRequest.getFilesystemName(file);
-			
 			System.out.println("업로드시 원본 파일명 : " + originalFileName);
 			System.out.println("서버에 저장된 실제 파일명 : " + fileSystemName);
 		}

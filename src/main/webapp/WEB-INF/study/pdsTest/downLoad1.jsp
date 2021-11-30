@@ -8,6 +8,27 @@
   <meta charset="UTF-8">
   <title>downLoad1.jsp</title>
   <%@ include file="/include/bs4.jsp" %>
+  <script>
+    function fileDelete(file) {
+    	var ans = confirm("파일을 삭제하시겠습니까?");
+    	if(!ans) return false;
+    	
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/fileDelete.st",
+    		data : {file : file},
+    		success:function(res) {
+    			if(res == "fileDeleteOk") {
+    				alert("삭제처리 되었습니다.");
+    				location.reload();
+    			}
+    			else {
+    				alert("삭제 실패~~~");
+    			}
+    		}
+    	});
+    }
+  </script>
 </head>
 <body>
 <%@ include file="/include/header_home.jsp" %>
@@ -42,7 +63,10 @@
           	<a href="${ctp}/data/pdsTest/${file}" download="${file}">${file}</a>
           </c:if>
         </td>
-        <td><a href="${ctp}/fileDelete?file=${file}" class="btn btn-secondary btn-sm">삭제</a></td>
+        <td>
+          <a href="${ctp}/fileDelete?file=${file}" class="btn btn-outline-secondary btn-sm">삭제</a> /
+          <a href="javascript:fileDelete('${file}')" class="btn btn-outline-secondary btn-sm">aJax삭제</a>
+        </td>
       </tr>
     </c:forEach>
   </table>
