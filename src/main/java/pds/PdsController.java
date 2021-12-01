@@ -56,6 +56,11 @@ public class PdsController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		else if(com.equals("/pdsDownLoad")) {
+			command = new PdsDownLoadCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
