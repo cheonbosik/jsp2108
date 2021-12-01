@@ -194,7 +194,7 @@ public class MemberDAO {
 		try {
 			sql = "update member set pwd=?,nickName=?,name=?,email=?,gender=?,"
 					+ "birthday=?, tel=?, address=?, homePage=?, job=?, hobby=?,"
-					+ "content=?, userInfor=?,pwdKey=? where mid=?";
+					+ "content=?, userInfor=?,pwdKey=?,photo=? where mid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getPwd());
 			pstmt.setString(2, vo.getNickName());
@@ -210,7 +210,8 @@ public class MemberDAO {
 			pstmt.setString(12, vo.getContent());
 			pstmt.setString(13, vo.getUserInfor());
 			pstmt.setInt(14, vo.getPwdKey());
-			pstmt.setString(15, vo.getMid());
+			pstmt.setString(15, vo.getPhoto());
+			pstmt.setString(16, vo.getMid());
 			pstmt.executeUpdate();
 			res = 1;
 		} catch (SQLException e) {

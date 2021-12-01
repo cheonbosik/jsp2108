@@ -124,7 +124,7 @@
 <%@ include file="../../include/header_home.jsp" %>
 <%@ include file="../../include/nav.jsp" %>
 <div class="container" style="padding:30px">
-  <form name="myform" method="post" action="<%=request.getContextPath()%>/memUpdateOk.mem" class="was-validated">
+  <form name="myform" method="post" action="<%=request.getContextPath()%>/memUpdateOk.mem" enctype="multipart/form-data" class="was-validated">
     <h2>회 원 정 보 수 정</h2>
     <br/>
     <div class="form-group">
@@ -309,6 +309,7 @@
     <button type="reset" class="btn btn-secondary">다시작성</button>
     <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/memMain.mem';">돌아가기</button>
     <input type="hidden" name="mid" value="${sMid}"/>
+    <input type="hidden" name="photo" value="<%=vo.getPhoto()%>"/>
   </form>
   <p><br/></p>
 </div>

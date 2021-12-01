@@ -1,40 +1,50 @@
 package member;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 public class MemUpdateOkCommand implements MemberInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mid = request.getParameter("mid")==null ? "": request.getParameter("mid").trim();
-		String pwd = request.getParameter("pwd")==null ? "": request.getParameter("pwd").trim();
-		String nickName = request.getParameter("nickName")==null ? "": request.getParameter("nickName").trim();
-		String name = request.getParameter("name")==null ? "": request.getParameter("name").trim();
+		String realPath = request.getServletContext().getRealPath("/data/member");
+		int maxSize = 1024 * 1024 * 2;	// 업로드할 최대 용량은 2MByte로 한다.
+		String encoding = "UTF-8";
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, maxSize, encoding, new DefaultFileRenamePolicy());	// 파일 업로드 완료...
+		
+		String mid = multipartRequest.getParameter("mid")==null ? "": multipartRequest.getParameter("mid").trim();
+		String pwd = multipartRequest.getParameter("pwd")==null ? "": multipartRequest.getParameter("pwd").trim();
+		String nickName = multipartRequest.getParameter("nickName")==null ? "": multipartRequest.getParameter("nickName").trim();
+		String name = multipartRequest.getParameter("name")==null ? "": multipartRequest.getParameter("name").trim();
 		String name_ = name;
-		String email1 = request.getParameter("email1")==null ? "": request.getParameter("email1").trim();
-		String email2 = request.getParameter("email2")==null ? "": request.getParameter("email2").trim();
+		String email1 = multipartRequest.getParameter("email1")==null ? "": multipartRequest.getParameter("email1").trim();
+		String email2 = multipartRequest.getParameter("email2")==null ? "": multipartRequest.getParameter("email2").trim();
 		String email = email1 + "@" + email2;
-		String gender = request.getParameter("gender")==null ? "": request.getParameter("gender").trim();
-		String birthday = request.getParameter("birthday")==null ? "": request.getParameter("birthday");
-		String tel1 = request.getParameter("tel1")==null ? "": request.getParameter("tel1").trim();
-		String tel2 = request.getParameter("tel2")==null ? "": request.getParameter("tel3").trim();
-		String tel3 = request.getParameter("tel3")==null ? "": request.getParameter("tel3").trim();
+		String gender = multipartRequest.getParameter("gender")==null ? "": multipartRequest.getParameter("gender").trim();
+		String birthday = multipartRequest.getParameter("birthday")==null ? "": multipartRequest.getParameter("birthday");
+		String tel1 = multipartRequest.getParameter("tel1")==null ? "": multipartRequest.getParameter("tel1").trim();
+		String tel2 = multipartRequest.getParameter("tel2")==null ? "": multipartRequest.getParameter("tel3").trim();
+		String tel3 = multipartRequest.getParameter("tel3")==null ? "": multipartRequest.getParameter("tel3").trim();
 		String tel = tel1 + "/" + tel2 + "/" + tel3;
-		String address = request.getParameter("address")==null ? "": request.getParameter("address");
-		String homePage = request.getParameter("homePage")==null ? "": request.getParameter("homePage").trim();
-		String job = request.getParameter("job")==null ? "": request.getParameter("job").trim();
-		String userInfor = request.getParameter("userInfor")==null ? "": request.getParameter("userInfor");
-		String[] hobbys = request.getParameterValues("hobby");
+		String address = multipartRequest.getParameter("address")==null ? "": multipartRequest.getParameter("address");
+		String homePage = multipartRequest.getParameter("homePage")==null ? "": multipartRequest.getParameter("homePage").trim();
+		String job = multipartRequest.getParameter("job")==null ? "": multipartRequest.getParameter("job").trim();
+		String userInfor = multipartRequest.getParameter("userInfor")==null ? "": multipartRequest.getParameter("userInfor");
+		String[] hobbys = multipartRequest.getParameterValues("hobby");
 		String hobby = "";
 		for(int i=0; i<hobbys.length; i++) {
 			hobby += hobbys[i] + "/";
 		}
 		hobby = hobby.substring(0, hobby.lastIndexOf("/"));
-		String content = request.getParameter("content")==null ? "": request.getParameter("content");
+		String content = multipartRequest.getParameter("content")==null ? "": multipartRequest.getParameter("content");
 		
 		MemberDAO dao = new MemberDAO();
 		
@@ -71,7 +81,20 @@ public class MemUpdateOkCommand implements MemberInterface {
 		vo.setHomePage(homePage);
 		vo.setJob(job);
 		vo.setHobby(hobby);
-		// 이미지 처리.....
+		
+  	// 회원사진이 업로드(갱신)처리 되었을때 처리
+		String fName = multipartRequest.getFilesystemName("fName");
+		String photo = multipartRequest.getParameter("photo");
+		if(fName != null) {
+			vo.setPhoto(fName);
+			if(!photo.equals("noimage.jpg")) {
+				new File(realPath + "/" + photo).delete();
+			}
+		}
+		else {
+			vo.setPhoto(photo);
+		}
+		
 		vo.setContent(content);
 		vo.setUserInfor(userInfor);
 		
