@@ -14,6 +14,7 @@ import conn.SecurityUtil;
 
 public class PdsInputOkCommand implements PdsInterface {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String realPath = request.getServletContext().getRealPath("/data/pds");

@@ -19,9 +19,10 @@ public class FileDownLoad extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fName = request.getParameter("file");
 		
+		// 아래로 파일 다운로드 처리부분이다.
 		// ServletContext application = request.getServletContext();
 		// String realPath = application.getRealPath("/data/pdsTest");
-		
+		// 위의 두줄을 아래 1줄로 표시할 수 있다.
 		String realPath = request.getServletContext().getRealPath("/data/pdsTest/");
 		
 		File file = new File(realPath+fName);
@@ -54,6 +55,7 @@ public class FileDownLoad extends HttpServlet {
 			servletOutputStream.write(b, 0, data);
 		}
 		servletOutputStream.flush();
+		// 여기까지 파일 다운로드 처리이다.
 		
 		servletOutputStream.close();
 		fileInputStream.close();

@@ -47,7 +47,7 @@
     		fName = "fName" + i;
     		if(document.getElementById(fName) != null) {
 	    		if(document.getElementById(fName).value != "" && document.getElementById(fName).value != null) {
-	    			tempFname = document.getElementById(fName).value;
+	    			var tempFname = document.getElementById(fName).value;
 	    			var ext = tempFname.substring(tempFname.lastIndexOf(".")+1);
 	    			var uExt = ext.toUpperCase();
 	    			

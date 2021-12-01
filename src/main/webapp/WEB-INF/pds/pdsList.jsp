@@ -14,7 +14,17 @@
 	  function partCheck() {
 		  var part = partForm.part.value;
 		  location.href = "${ctp}/pdsList.pds?pag=${pag}&part="+part;
-	  }  
+	  }
+    
+    // 자료내용 상세보기(팝업창 이용)
+    function nWin(idx) {
+    	var url = "${ctp}/pdsContent.pds?idx="+idx;
+    	var winX = 500;
+    	var winY = 400;
+    	var x = (window.screen.width)/2 - winX/2;
+    	var y = (window.screen.height)/2 - winY/2;
+    	window.open(url,"pdsWindow","width="+winX+",height="+winY+",left="+x+",top="+y);
+    }
   </script>
 </head>
 <body>
@@ -47,6 +57,7 @@
     	<th>자료제목</th>
     	<th>올린이</th>
     	<th>올린날짜</th>
+    	<th>분류</th>
     	<th>파일명(사이즈)</th>
     	<th>다운수</th>
     	<th>비고</th>
@@ -55,7 +66,8 @@
     	<tr>
     	  <td>${curScrStrarNo}</td>
     	  <td>
-    	    ${vo.title}
+    	    <c:if test="${vo.openSw == '공개' || sMid == vo.mid || sLevel == 0}"><a href="javascript:nWin(${vo.idx})">${vo.title}</a></c:if>
+    	    <c:if test="${vo.openSw != '공개' && sMid != vo.mid && sLevel != 0}">${vo.title}</c:if>
     	    <c:if test="${vo.wNdate <= 24}"><img src="${ctp}/images/new.gif"/></c:if>
     	  </td>
     	  <td>${vo.nickName}</td>
@@ -63,15 +75,23 @@
     	    <c:if test="${vo.wNdate <= 24}">${fn:substring(vo.fDate,11,19)}</c:if>
 	        <c:if test="${vo.wNdate >  24}">${fn:substring(vo.fDate,0,10)}</c:if>
     	  </td>
-    	  <td>
-    	  	<c:set var="fNames" value="${fn:split(vo.fName,'/')}"/>
-    	  	<c:forEach var="fName" items="${fNames}">
-	    	    ${fName}<br/>
-    	  	</c:forEach>
-    	  	(<fmt:formatNumber value="${vo.fSize / 1024}" pattern="#,##0"/>KByte)
+    	  <td>${vo.part}</td>
+    	  <td>  <!-- 개별파일다운로드 -->
+    	    <c:if test="${vo.openSw == '공개' || sMid == vo.mid || sLevel == 0}">
+	    	  	<c:set var="fNames" value="${fn:split(vo.fName,'/')}"/>
+	    	  	<c:forEach var="fName" items="${fNames}">
+		    	    <a href="#">${fName}</a><br/>
+	    	  	</c:forEach>
+	    	  	(<fmt:formatNumber value="${vo.fSize / 1024}" pattern="#,##0"/>KByte)
+    	  	</c:if>
+    	  	<c:if test="${vo.openSw != '공개' && sMid != vo.mid && sLevel != 0}">비공개</c:if>
     	  </td>
     	  <td>${vo.downNum}</td>
-    	  <td><a href="#" class="btn btn-outline-secondary">삭제</a></td>
+    	  <td>
+    	    <c:if test="${vo.openSw == '공개' || sMid == vo.mid || sLevel == 0}">
+    	    	<a href="#" class="btn btn-outline-secondary">삭제</a>
+    	    </c:if>
+    	    <c:if test="${vo.openSw != '공개' && sMid != vo.mid && sLevel != 0}">비공개</c:if>
     	</tr>
     	<c:set var="curScrStrarNo" value="${curScrStrarNo - 1}"/>
     </c:forEach>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@SuppressWarnings("serial")
 @WebServlet("*.pds")
 public class PdsController extends HttpServlet {
 	@Override
@@ -39,6 +40,11 @@ public class PdsController extends HttpServlet {
 			command = new PdsInputOkCommand();
 			command.execute(request, response);
 			viewPage = "/WEB-INF/message/message.jsp";
+		}
+		else if(com.equals("/pdsContent")) {
+			command = new PdsContentCommand();
+			command.execute(request, response);
+			viewPage += "/pdsContent.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
