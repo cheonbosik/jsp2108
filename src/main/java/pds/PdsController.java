@@ -46,6 +46,16 @@ public class PdsController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/pdsContent.jsp";
 		}
+		else if(com.equals("/pdsDownUpdate")) {
+			command = new PdsDownUpdateCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/pdsDelete")) {
+			command = new PdsDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

@@ -25,6 +25,46 @@
     	var y = (window.screen.height)/2 - winY/2;
     	window.open(url,"pdsWindow","width="+winX+",height="+winY+",left="+x+",top="+y);
     }
+    
+    // 다운로드수 증가
+    function downCheck(idx) {
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/pdsDownUpdate.pds",
+    		data : {idx : idx},
+    		success:function() {
+    			location.reload();
+    		}
+    	});
+    }
+    
+    // 파일 삭제처리
+    function pdsDelCheck(idx, fSName) {
+    	var ans = confirm("파일을 삭제하시겠습니까?");
+    	if(!ans) return false;
+    	pwd = prompt("비밀번호를 입력하세요?");
+    	
+    	var query = {
+    			idx : idx,
+    			fSName : fSName,
+    			pwd : pwd
+    	}
+    	
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/pdsDelete.pds",
+    		data : query,
+    		success:function(data) {
+    			if(data == 'pdsDeleteOk') {
+    				alert("삭제 되었습니다.");
+    				location.reload();
+    			}
+    			else {
+    				alert("삭제 실패~~~");
+    			}
+    		}
+    	});
+    }
   </script>
 </head>
 <body>
@@ -79,8 +119,9 @@
     	  <td>  <!-- 개별파일다운로드 -->
     	    <c:if test="${vo.openSw == '공개' || sMid == vo.mid || sLevel == 0}">
 	    	  	<c:set var="fNames" value="${fn:split(vo.fName,'/')}"/>
-	    	  	<c:forEach var="fName" items="${fNames}">
-		    	    <a href="#">${fName}</a><br/>
+	    	  	<c:set var="fSNames" value="${fn:split(vo.fSName,'/')}"/>
+	    	  	<c:forEach var="fName" items="${fNames}" varStatus="st">
+		    	    <a href="${ctp}/data/pds/${fSNames[st.index]}" download="${fName}" onclick="downCheck(${vo.idx})">${fName}</a><br/>
 	    	  	</c:forEach>
 	    	  	(<fmt:formatNumber value="${vo.fSize / 1024}" pattern="#,##0"/>KByte)
     	  	</c:if>
@@ -89,7 +130,7 @@
     	  <td>${vo.downNum}</td>
     	  <td>
     	    <c:if test="${vo.openSw == '공개' || sMid == vo.mid || sLevel == 0}">
-    	    	<a href="#" class="btn btn-outline-secondary">삭제</a>
+    	    	<a href="javascript:pdsDelCheck('${vo.idx}','${vo.fSName}')" class="btn btn-outline-secondary">삭제</a>
     	    </c:if>
     	    <c:if test="${vo.openSw != '공개' && sMid != vo.mid && sLevel != 0}">비공개</c:if>
     	</tr>

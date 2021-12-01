@@ -158,5 +158,33 @@ public class PdsDAO {
 		}
 		return vo;
 	}
+
+	// 다운로드수 증가하기
+	public void setPdsDownUpdate(int idx) {
+		try {
+			sql = "update pds set downNum = downNum + 1 where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+
+	// 자료파일의 정보를 삭제처리한다.
+	public void pdsDelete(int idx) {
+		try {
+			sql = "delete from pds where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
 	
 }
