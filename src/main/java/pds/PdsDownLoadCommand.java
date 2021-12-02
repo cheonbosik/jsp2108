@@ -22,7 +22,6 @@ public class PdsDownLoadCommand implements PdsInterface {
 		
 		String[] fNames = vo.getfName().split("/");
 		String[] fSNames = vo.getfSName().split("/");
-		System.out.println("fSNames : " + fSNames);
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -52,7 +51,8 @@ public class PdsDownLoadCommand implements PdsInterface {
 		
 		for(int i=0; i<fSNames.length; i++) {
 			File file = new File(realPath + fSNames[i]);
-			File moveAndRename = new File(zipName + fSNames[i]);
+			//File moveAndRename = new File(zipName + fSNames[i]);
+			File moveAndRename = new File(realPath+fNames[i]);
 			
 			file.renameTo(moveAndRename);
 			
@@ -67,7 +67,7 @@ public class PdsDownLoadCommand implements PdsInterface {
 			zos.closeEntry();
 			fis.close();
 			
-			moveAndRename.renameTo(file);
+			//moveAndRename.renameTo(file);
 		}
 		zos.close();
 		
@@ -97,7 +97,11 @@ public class PdsDownLoadCommand implements PdsInterface {
 		sos.close();
 		fis.close();
 		
+		// 다운로드 완료후 통합작업된 압축파일을 삭제처리한다.
 		new File(zipPath + zipName).delete();
+		
+		// 자료 다운로드수 증가하기
+		dao.setPdsDownUpdate(idx);
 	}
 
 }

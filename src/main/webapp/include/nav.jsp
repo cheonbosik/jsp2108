@@ -52,6 +52,7 @@
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/pdsTest2.st">PDS연습2</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/pdsTest3.st">PDS연습3</a>
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/dynamicForm.st">동적폼연습</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/calendar.st">JSP달력</a>
 		    </div>
       </li>
 <%    } %>

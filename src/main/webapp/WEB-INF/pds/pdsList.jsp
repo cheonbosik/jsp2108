@@ -71,7 +71,10 @@
     	$.ajax({
     		type : "post",
     		url : "${ctp}/pdsDownLoad.pds",
-    		data : {idx : idx}
+    		data : {idx : idx},
+    		success:function() {
+    			location.reload();
+    		}
     	});
     }
   </script>
