@@ -54,11 +54,19 @@
 <p><br></p>
 <div class="container">
   <font size="5">일정관리</font> &nbsp; &nbsp;
-    <a href="${ctp}/schedule.sc?yy=<%=prevYear-1%>&mm=<%=mm%>" title="이전년도">◁◁</a>
+<%  if(mm == 0) { %>
+      <a href="${ctp}/schedule.sc?yy=<%=prevYear%>&mm=<%=mm%>" title="이전년도">◁◁</a>
+<%  } else { %>
+			<a href="${ctp}/schedule.sc?yy=<%=prevYear-1%>&mm=<%=mm%>" title="이전년도">◁◁</a>
+<%  } %>
     <a href="${ctp}/schedule.sc?yy=<%=prevYear%>&mm=<%=prevMonth%>" title="전월">◀</a>
     (<%=yy%>년 <%=mm+1%>월)
     <a href="${ctp}/schedule.sc?yy=<%=nextYear%>&mm=<%=nextMonth%>" title="다음월">▶</a>
-    <a href="${ctp}/schedule.sc?yy=<%=nextYear+1%>&mm=<%=mm%>" title="다음년도">▷▷</a>
+<%  if(mm == 11) { %>
+    	<a href="${ctp}/schedule.sc?yy=<%=nextYear%>&mm=<%=mm%>" title="다음년도">▷▷</a>
+<%  } else { %>
+			<a href="${ctp}/schedule.sc?yy=<%=nextYear+1%>&mm=<%=mm%>" title="다음년도">▷▷</a>
+<%  } %>
     &nbsp; &nbsp;
     <a href="${ctp}/schedule.sc" title="오늘날짜">■</a>
   <br/>
