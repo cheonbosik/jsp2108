@@ -11,7 +11,9 @@ create table schedule (
 desc schedule;
 /* drop table schedule; */
 /* delete from schedule; */
-
 insert into schedule value (default,'hkd1234',default,'모임','저녁약속: 청주사거리 맛집 6시');
+insert into schedule value (default,'hkd1234','2021-09-02','모임','저녁약속: 청주사거리 맛집 6시');
 
 select * from schedule;
+
+select * from schedule where date(sDate) = '2021-9-2' and mid = 'hkd1234';
