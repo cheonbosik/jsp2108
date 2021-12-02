@@ -26,7 +26,7 @@
   cal.set(yy, mm, 1);
   int startWeek = cal.get(Calendar.DAY_OF_WEEK);
   
-  
+  /*
   int prevYear = yy; 	// 전년도
   int nextYear = yy; 	// 다음년도
   int prevMonth = mm - 1; 	// 전월
@@ -40,6 +40,16 @@
   	nextYear++;
   	nextMonth = 0;
   }
+  */
+  if(mm < 0) {
+  	yy--;
+  	mm = 11;
+  }
+  if(mm > 11) {
+  	yy++;
+  	mm = 0;
+  }
+  
 %>
 <!DOCTYPE html>
 <html>
@@ -54,6 +64,7 @@
 <p><br></p>
 <div class="container">
   <font size="5">일정관리</font> &nbsp; &nbsp;
+<%--
 <%  if(mm == 0) { %>
       <a href="${ctp}/schedule.sc?yy=<%=prevYear%>&mm=<%=mm%>" title="이전년도">◁◁</a>
 <%  } else { %>
@@ -67,6 +78,12 @@
 <%  } else { %>
 			<a href="${ctp}/schedule.sc?yy=<%=nextYear+1%>&mm=<%=mm%>" title="다음년도">▷▷</a>
 <%  } %>
+--%>
+    <a href="${ctp}/schedule.sc?yy=<%=yy-1%>&mm=<%=mm%>" title="이전년도">◁◁</a>
+    <a href="${ctp}/schedule.sc?yy=<%=yy%>&mm=<%=mm-1%>" title="이전월">◀</a>
+    (<%=yy%>년 <%=mm+1%>월)
+    <a href="${ctp}/schedule.sc?yy=<%=yy%>&mm=<%=mm+1%>" title="다음월">▶</a>
+    <a href="${ctp}/schedule.sc?yy=<%=yy+1%>&mm=<%=mm%>" title="다음년도">▷▷</a>
     &nbsp; &nbsp;
     <a href="${ctp}/schedule.sc" title="오늘날짜">■</a>
   <br/>
@@ -99,16 +116,16 @@
 			}
 			
 			if(cal.get(Calendar.DAY_OF_WEEK) == 1) {
-				out.println("<td><a href='scContent.sc?ymd="+ymd+"'><font color='red'>"+cal.get(Calendar.DATE)+"</font></a><br/><span title='"+content+"'>"+part+"</span></td>");
+				out.println("<td><a href='scContent.sc?ymd="+ymd+"'><font color='red'>"+cal.get(Calendar.DATE)+"</font></a><br/><span title='"+content+" ...'>"+part+"</span></td>");
 			}
 			else if(cal.get(Calendar.DAY_OF_WEEK) == 7) {
-				out.println("<td><a href='scContent.sc?ymd="+ymd+"'><font color='blue'>"+cal.get(Calendar.DATE)+"</font></a><br/><span title='"+content+"'>"+part+"</span></td>");
+				out.println("<td><a href='scContent.sc?ymd="+ymd+"'><font color='blue'>"+cal.get(Calendar.DATE)+"</font></a><br/><span title='"+content+" ...'>"+part+"</span></td>");
 			}
 			else if(cal.get(Calendar.YEAR)==calToday.get(Calendar.YEAR) && cal.get(Calendar.MONTH)==calToday.get(Calendar.MONTH) && cal.get(Calendar.DATE)==calToday.get(Calendar.DATE)) {
-				out.println("<td style='background-color:skyblue'><a href='scContent.sc?ymd="+ymd+"'><b>"+cal.get(Calendar.DATE)+"</b></a><br/><span title='"+content+"'>"+part+"</span></td>");
+				out.println("<td style='background-color:skyblue'><a href='scContent.sc?ymd="+ymd+"'><b>"+cal.get(Calendar.DATE)+"</b></a><br/><span title='"+content+" ...'>"+part+"</span></td>");
 			}
 			else {
-				out.println("<td><a href='scContent.sc?ymd="+ymd+"'><font color='#000'>"+cal.get(Calendar.DATE)+"</font></a><br/><span title='"+content+"'>"+part+"</span></td>");
+				out.println("<td><a href='scContent.sc?ymd="+ymd+"'><font color='#000'>"+cal.get(Calendar.DATE)+"</font></a><br/><span title='"+content+" ...'>"+part+"</span></td>");
 			}
 			
 			if(cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
