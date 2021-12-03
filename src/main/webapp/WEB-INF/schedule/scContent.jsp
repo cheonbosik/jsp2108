@@ -23,7 +23,7 @@
   	// 일정 삭제
   	function delCheck() {
   		var ans = confirm("오늘 일정을 삭제 하시겠습니까?");
-  		if(ans) location.href = "${ctp}/scDelete.sc?idx=${vo.idx}&ymd=${ymd}&mid=${sMid}";
+  		if(ans) location.href = "${ctp}/scDelete.sc?idx=${vo.idx}&ymd=${ymd}";
   	}
   </script>
 </head>
@@ -69,7 +69,7 @@
   	  <input type="button" value="돌아가기" onclick="location.href='${ctp}/schedule.sc?ymd=${ymd}';" class="btn btn-secondary"/>
   	</div>
   	<input type="hidden" name="idx" value="${vo.idx}"/>	<!-- 수정처리시에 넘져줘야한다. -->
-  	<input type="hidden" name="ymd" value="${ymd}"/>
+  	<%-- <input type="hidden" name="ymd" value="${ymd}"/> --%>
   </form>
 </div>
 <br/>

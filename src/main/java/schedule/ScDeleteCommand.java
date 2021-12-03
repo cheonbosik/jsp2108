@@ -12,7 +12,7 @@ public class ScDeleteCommand implements ScheduleInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		String sDate = request.getParameter("ymd")==null? "" : request.getParameter("ymd");
-		String mid = request.getParameter("mid")==null? "" : request.getParameter("mid");
+		//String mid = request.getParameter("mid")==null? "" : request.getParameter("mid");
 		
 		ScheduleDAO dao = new ScheduleDAO();
 		
@@ -24,7 +24,8 @@ public class ScDeleteCommand implements ScheduleInterface {
 		else {
 			request.setAttribute("msg", "scDeleteNo");
 		}
-		request.setAttribute("url", request.getContextPath()+"/schedule.sc?ymd="+sDate+"&mid="+mid);
+		//request.setAttribute("url", request.getContextPath()+"/schedule.sc?ymd="+sDate+"&mid="+mid);
+		request.setAttribute("url", request.getContextPath()+"/schedule.sc?ymd="+sDate);
 	}
 
 }
