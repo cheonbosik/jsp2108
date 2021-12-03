@@ -45,6 +45,8 @@
   	else if(msg == "scDeleteNo") msg = "일정이 삭제 실패~~~";
   	else if(msg == "wmInputOk") msg = "메세지가 전송 되었습니다.";
   	else if(msg == "wmInputNo") msg = "메세지 전송 실패~~~";
+  	else if(msg == "wmDeleteOk") msg = "메세지가 휴지통으로 이동되었습니다.";
+  	else if(msg == "wmDeleteNo") msg = "메세지 휴지통 이동 실패~~~";
   	
     alert(msg);
     if(url != "") location.href = url;

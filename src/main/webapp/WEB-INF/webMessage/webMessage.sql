@@ -18,3 +18,7 @@ insert into webMessage values (default,'안녕! 말숙아~~','주말에 시간�
 insert into webMessage values (default,'답장! 반갑다 길동아~~','주말에 프로젝트 계획이있어서 다음에 만나자','kms1234','s',default,'hkd1234','n',default);
 
 select * from webMessage order by idx desc;
+
+select * from webMessage where (receiveId='hkd1234' and receiveSw='g') or (sendId='hkd1234' and sendSw='g') order by idx desc
+select * from webMessage where receiveId=? and (receiveSw='g' or sendSw='g') order by idx desc;
+select * from webMessage where sendId='hkd1234' and (receiveSw='g' or sendSw='g') order by idx desc;

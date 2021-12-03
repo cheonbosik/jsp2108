@@ -11,7 +11,15 @@
     function wmDeleteAll() {
     	var ans = confirm("휴지통을 모두 비우시겠습니까?");
     	if(!ans) return false;
-    	// ajax처리
+    	
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/wmDeleteAll.wm",
+    		success:function() {
+  				alert("휴지통의 모든 메세지가 삭제 되었습니다.");
+  				location.reload();
+    		} 
+    	});
     }
   </script>
   <style>
@@ -28,6 +36,7 @@
       height: 500px;
       text-align: left;
       background-color: #eec;
+      overflow: auto;
     }
     #footerTopMargin {
       clear:both;
@@ -46,9 +55,9 @@
   <div id="leftWindow">
   	<p><br/></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=0">메세지작성</a></p>
-  	<p><a href="${ctp}/wmMessage.wm?mSw=1">받은메세지</a></p>
+  	<p><a href="${ctp}/wmMessage.wm?mSw=1&mFlag=r">받은메세지</a></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=2">새메세지</a></p>
-  	<p><a href="${ctp}/wmMessage.wm?mSw=3">보낸메세지</a></p>
+  	<p><a href="${ctp}/wmMessage.wm?mSw=3&mFlag=s">보낸메세지</a></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=4">수신확인</a></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=5">휴지통</a></p>
   	<p><a href="javascript:wmDeleteAll()">휴지통비우기</a></p>
@@ -59,9 +68,29 @@
   	    <h3>메세지작성</h3>
   	    <jsp:include page="wmInput.jsp"/>
   	  </c:if>
-  	  <c:if test="${mSw == 1}">
+  	  <c:if test="${mSw == 1}">  <!-- 받은 메세지(전체) -->
   	    <h3>받은 메세지</h3>
   	    <jsp:include page="wmList.jsp"/>
+  	  </c:if>
+  	  <c:if test="${mSw == 2}">  <!-- 새 메세지확인하기 -->
+  	    <h3>신규 메세지</h3>
+  	    <jsp:include page="wmList.jsp"/>
+  	  </c:if>
+  	  <c:if test="${mSw == 3}">  <!-- 보낸 메세지확인하기 -->
+  	    <h3>보낸 메세지</h3>
+  	    <jsp:include page="wmList.jsp"/>
+  	  </c:if>
+  	  <c:if test="${mSw == 4}">  <!-- 수신여부 확인하기 -->
+  	    <h3>수신 확인</h3>
+  	    <jsp:include page="wmList.jsp"/>
+  	  </c:if>
+  	  <c:if test="${mSw == 5}">  <!-- 휴지통 확인하기 -->
+  	    <h3>휴지통 목록</h3>
+  	    <jsp:include page="wmList.jsp"/>
+  	  </c:if>
+  	  <c:if test="${mSw == 6}">		<!-- 메세지 내용상세보기 -->
+  	    <h3>메세지 내용보기</h3>
+  	    <jsp:include page="wmContent.jsp"/>
   	  </c:if>
   	</p>
   </div>

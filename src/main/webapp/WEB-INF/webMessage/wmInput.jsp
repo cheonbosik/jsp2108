@@ -42,7 +42,7 @@
       </tr>
       <tr>
         <th>받는 사람</th>
-        <td><input type="text" name="receiveId" placeholder="받는사람 아이디" class="form-control"/></td>
+        <td><input type="text" name="receiveId" value="${param.receiveId}" placeholder="받는사람 아이디" class="form-control"/></td>
       </tr>
       <tr>
         <th>메세지 제목</th>
