@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import guest.GuestDAO;
+import webMessage.WebMessageDAO;
 
 public class MemMainCommand implements MemberInterface {
 
@@ -37,6 +38,11 @@ public class MemMainCommand implements MemberInterface {
 	  GuestDAO guestDAO = new GuestDAO();
 	  int guestCnt = guestDAO.getWriteCnt(mid, nickName, vo.getName());
 	  request.setAttribute("guestCnt", guestCnt);
+	  
+	  // 사용자에게 전달되어온 새로운 메세지 개수 담아오기
+	  WebMessageDAO webMessageDAO = new WebMessageDAO();
+	  int newMessageCnt = webMessageDAO.getnewMessageCnt(mid);
+	  request.setAttribute("newMessageCnt", newMessageCnt);
 	}
 
 }

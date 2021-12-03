@@ -159,11 +159,35 @@ public class WebMessageDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.executeUpdate();
+			getConn.pstmtClose();
+			
+			sql = "update webMessage set sendSw = 'x' where sendId = ? and sendSw = 'g'";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
+	}
+
+	// 새 메세지의 개수 담아오기
+	public int getnewMessageCnt(String mid) {
+		int getnewMessageCnt = 0;
+		try {
+			sql = "select count(*) from webMessage where receiveId=? and receiveSw='n'";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			getnewMessageCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return getnewMessageCnt;
 	}
 	
 }
