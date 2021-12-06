@@ -19,7 +19,7 @@
   /* 이곳부터 페이징 처리 변수 지정 시작 */
   int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));	// 현재페이지 구하기
   
-  int pageSize = 2;				  					// 1. 한 페이지 분량
+  int pageSize = 5;				  					// 1. 한 페이지 분량
   int totRecCnt = dao.totRecCnt();		// 2. 총 레코드건수 구하기
   int totPage = (totRecCnt % pageSize)==0 ? totRecCnt/pageSize : (totRecCnt/pageSize) + 1;  //3. 총 페이지 수를 구한다.
   int startIndexNo = (pag - 1) * pageSize;			// 4. 현재페이지의 시작 index번호
@@ -27,7 +27,7 @@
   /* 이곳까지 페이징 처리 변수 지정 끝 */
   
   /* 블록페이징처리(블록의 크기를 이용하여, '현재페이지의 블록위치(curBlock)', '마지막 블럭의 위치(lastBlock)'를 구한다.) */
-  int blockSize = 5;		// 한블록의 크기를 3개의 Page로 본다.(사용자가 지정한다.)
+  int blockSize = 3;		// 한블록의 크기를 3개의 Page로 본다.(사용자가 지정한다.)
   int curBlock = (pag - 1) / blockSize;		// 현재페이지의 블록위치
   int lastBlock = (totPage % blockSize)==0 ? ((totPage / blockSize) - 1) : (totPage / blockSize);
   /* 블록페이징처리 끝 */
@@ -164,7 +164,7 @@
 			[<a href="gList.jsp?pag=<%=(curBlock-1)*blockSize + 1%>">이전블록</a>]
 <% } %>
 <%
-  for(int i=(curBlock*blockSize)+1; i<=(curBlock*blockSize)+1; i++) {
+  for(int i=(curBlock*blockSize)+1; i<=(curBlock*blockSize)+blockSize; i++) {
   	if(i>totPage) break;
   	if(i == pag) out.println("<a href='gList.jsp?pag="+i+"'><font color='red'><b>"+i+"</b></font></a>");
   	else out.println("<a href='gList.jsp?pag="+i+"'>"+i+"</a>");  	

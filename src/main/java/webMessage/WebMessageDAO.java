@@ -20,28 +20,38 @@ public class WebMessageDAO {
 	WebMessageVO vo = null;
 
 	// 메세지 가져오기...(전체메세지/새메지/보낸메세지/휴지통....)
-	public List<WebMessageVO> getWebMessageList(String mid, int mSw) {
+	public List<WebMessageVO> getWebMessageList(String mid, int mSw, int startIndexNo, int pageSize) {
 		List<WebMessageVO> vos = new ArrayList<WebMessageVO>();
 		try {
 			if(mSw == 1) {	// 받은메세지처리(전체메세지 가져오기)
-				sql = "select * from webMessage where receiveId=? and (receiveSw='n' or receiveSw='r') order by idx desc";
+				sql = "select * from webMessage where receiveId=? and (receiveSw='n' or receiveSw='r') order by idx desc limit ?,?";
 			}
 			else if(mSw == 2) {	// 새 메세지처리
-				sql = "select * from webMessage where receiveId=? and receiveSw='n' order by idx desc";
+				sql = "select * from webMessage where receiveId=? and receiveSw='n' order by idx desc limit ?,?";
 			}
 			else if(mSw == 3) {	// 보낸 메세지처리
-				sql = "select * from webMessage where sendId=? and sendSw='s' order by idx desc";
+				sql = "select * from webMessage where sendId=? and sendSw='s' order by idx desc limit ?,?";
 			}
 			else if(mSw == 4) {	// 수신 메세지 확인처리
-				sql = "select * from webMessage where sendId=? and receiveSw='n' order by idx desc";
+				sql = "select * from webMessage where sendId=? and receiveSw='n' order by idx desc limit ?,?";
 			}
 			else if(mSw == 5) {	// 휴지통 메세지 확인처리
-				//sql = "select * from webMessage where receiveId=? and (receiveSw='g' or sendSw='g') order by idx desc";
-				sql = "select * from webMessage where (receiveId=? and receiveSw='g') or (sendId=? and sendSw='g') order by idx desc";
+				sql = "select * from webMessage where (receiveId=? and receiveSw='g') or (sendId=? and sendSw='g') order by idx desc limit ?,?";
+			}
+			else {	// mSw가 0일때는 새메세지 작성처리임...
+				return vos;
 			}
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
-			if(mSw == 5) pstmt.setString(2, mid);
+			if(mSw == 5) {
+				pstmt.setString(2, mid);
+				pstmt.setInt(3, startIndexNo);
+				pstmt.setInt(4, pageSize);
+			}
+			else {
+				pstmt.setInt(2, startIndexNo);
+				pstmt.setInt(3, pageSize);
+			}
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -131,10 +141,12 @@ public class WebMessageDAO {
 
 	// 휴지통으로 이동하기
 	// 받은메세지를 휴지통으로 이동시킬때는 receiveSw를 'g'로 변경처리
-	public int wmDeleteCheck(int idx, String mFlag) {
+//	public int wmDeleteCheck(int idx, String mFlag) {
+	public int wmDeleteCheck(int idx, int mSw) {
 		int res = 0;
 		try {
-			if(mFlag.equals("s")) {
+//			if(mSw.equals("s")) {
+			if(mSw == 11) {
 				sql = "update webMessage set sendSw = 'g' where idx = ?";
 			}
 			else {
@@ -152,7 +164,7 @@ public class WebMessageDAO {
 		return res;
 	}
 
-	// 메세지 휴지통에서 삭제처리(receiveSw의 'g'를 'x'로 변경처리
+	// 메세지 휴지통에서 삭제처리(receiveSw의 'g'를 'x'로 변경처리, sendeSw의 'g'를 'x'로 변경처리
 	public void wmDeleteAll(String mid) {
 		try {
 			sql = "update webMessage set receiveSw = 'x' where receiveId = ? and receiveSw = 'g'";
@@ -188,6 +200,40 @@ public class WebMessageDAO {
 			getConn.rsClose();
 		}
 		return getnewMessageCnt;
+	}
+
+	// 페이징처리를 위한 총 레코드건수 구해오기
+	public int totRecCnt(String mid, int mSw) {
+		int totRecCnt = 0;
+		try {
+			if(mSw == 1) {			// 받은메세지처리(전체메세지 가져오기)
+				sql = "select count(*) from webMessage where receiveId=? and (receiveSw='n' or receiveSw='r') order by idx desc";
+			}
+			else if(mSw == 2) {	// 새 메세지처리
+				sql = "select count(*) from webMessage where receiveId=? and receiveSw='n' order by idx desc";
+			}
+			else if(mSw == 3) {	// 보낸 메세지처리
+				sql = "select count(*) from webMessage where sendId=? and sendSw='s' order by idx desc";
+			}
+			else if(mSw == 4) {	// 수신 메세지 확인처리
+				sql = "select count(*) from webMessage where sendId=? and receiveSw='n' order by idx desc";
+			}
+			else if(mSw == 5) {	// 휴지통 메세지 확인처리
+				sql = "select count(*) from webMessage where (receiveId=? and receiveSw='g') or (sendId=? and sendSw='g') order by idx desc";
+			}
+			else { return totRecCnt; }	// mSw=0 일때는 입력처리임..
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			if(mSw == 5) pstmt.setString(2, mid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totRecCnt;
 	}
 	
 }

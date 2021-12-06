@@ -9,12 +9,14 @@
   <title>wmList.jsp</title>
   <%@ include file="/include/bs4.jsp" %>
   <script>
+  	setTimeout("location.reload()",1000*10)
+	
     function msgDel(idx) {
     	var ans = confirm("선택된 메세지를 삭제하시겠습니까?");
     	if(!ans) return false;
     	var query = {
     			idx : idx,
-    			mFlag : 's'
+    			mFlag : 11
     	}
     	
     	$.ajax({
@@ -45,16 +47,16 @@
         <c:if test="${mSw==3 || mSw==4}">받은날짜</c:if>
       </th>
     </tr>
-    <c:set var="mCount" value="${fn:length(vos)}"/>
+    <%-- <c:set var="mCount" value="${fn:length(vos)}"/> --%>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
-        <td>${mCount}</td>
+        <td>${curScrStrarNo}</td>
         <td>
           <c:if test="${mSw==1 || mSw==2 || mSw==5}">${vo.sendId}</c:if>
         	<c:if test="${mSw==3 || mSw==4}">${vo.receiveId}</c:if>
         </td>
         <td>
-          <a href="${ctp}/wmMessage.wm?mSw=6&idx=${vo.idx}&mFlag=${param.mFlag}">
+          <a href="${ctp}/wmMessage.wm?&mSw=6&idx=${vo.idx}&mFlag=${param.mFlag}">
 	          <c:if test="${vo.sendSw == 'g' && mSw == 5}">(보낸메세지) </c:if>
 	          ${vo.title}
           </a>
@@ -68,10 +70,39 @@
           ${fn:substring(vo.receiveDate,0,19)}
         </td>
       </tr>
-      <c:set var="mCount" value="${mCount - 1}"/>
+      <c:set var="curScrStrarNo" value="${curScrStrarNo - 1}"/>
     </c:forEach>
   </table>
 </div>
 <br/>
+<!-- 블록 페이징처리 시작(BS4 스타일적용) -->
+<div class="container">
+	<ul class="pagination justify-content-center pagination-sm">
+		<c:if test="${totPage == 0}"><p style="text-align:center"><b>자료가 없습니다.</b></p></c:if>
+		<c:if test="${totPage != 0}">
+		  <c:if test="${pag != 1}">
+		    <li class="page-item"><a href="wmMessage.wm?mSw=${mSw}&pag=1" title="첫페이지" class="page-link text-secondary">◁◁</a></li>
+		  </c:if>
+		  <c:if test="${curBlock > 0}">
+		    <li class="page-item"><a href="wmMessage.wm?mSw=${mSw}&pag=${(curBlock-1)*blockSize + 1}" title="이전블록" class="page-link text-secondary">◀</a></li>
+		  </c:if>
+		  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize)+blockSize}">
+		    <c:if test="${i == pag && i <= totPage}">
+		      <li class="page-item active"><a href='wmMessage.wm?mSw=${mSw}&pag=${i}' class="page-link text-light bg-secondary border-secondary">${i}</a></li>
+		    </c:if>
+		    <c:if test="${i != pag && i <= totPage}">
+		      <li class="page-item"><a href='wmMessage.wm?mSw=${mSw}&pag=${i}' class="page-link text-secondary">${i}</a></li>
+		    </c:if>
+		  </c:forEach>
+		  <c:if test="${curBlock < lastBlock}">
+		    <li class="page-item"><a href="wmMessage.wm?mSw=${mSw}&pag=${(curBlock+1)*blockSize + 1}" title="다음블록" class="page-link text-secondary">▶</a>
+		  </c:if>
+		  <c:if test="${pag != totPage}">
+		    <li class="page-item"><a href="wmMessage.wm?mSw=${mSw}&pag=${totPage}" title="마지막페이지" class="page-link" style="color:#555">▷▷</a>
+		  </c:if>
+		</c:if>
+	</ul>
+</div>
+<!-- 블록 페이징처리 끝 -->
 </body>
 </html>

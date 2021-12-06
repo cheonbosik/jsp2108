@@ -10,11 +10,12 @@ public class WmMsgDelCommand implements WebMessageInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mFlag = request.getParameter("mFlag")==null? "" : request.getParameter("mFlag");
+//		String mFlag = request.getParameter("mFlag")==null? "" : request.getParameter("mFlag");
+		int mSw = request.getParameter("mFlag")==null? 1 : Integer.parseInt(request.getParameter("mFlag"));
 		int idx = request.getParameter("idx")==null? 0 : Integer.parseInt(request.getParameter("idx"));
 		
 		WebMessageDAO dao = new WebMessageDAO();
-		dao.wmDeleteCheck(idx,mFlag);
+		dao.wmDeleteCheck(idx,mSw);
 	}
 
 }

@@ -55,9 +55,9 @@
   <div id="leftWindow">
   	<p><br/></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=0">메세지작성</a></p>
-  	<p><a href="${ctp}/wmMessage.wm?mSw=1&mFlag=r">받은메세지</a></p>
+  	<p><a href="${ctp}/wmMessage.wm?mSw=1&mFlag=10">받은메세지</a></p>	<!-- mSw는 우측에 표시될 화면을 의미하기에 휴지통으로 메세지보낼때 '받은메세지함'인지 '보낸메세지함'인지를 구별하기위해 mFlag를 이용함(10은 받은메세지, 11은 보낸메세지를 의미) -->
   	<p><a href="${ctp}/wmMessage.wm?mSw=2">새메세지</a></p>
-  	<p><a href="${ctp}/wmMessage.wm?mSw=3&mFlag=s">보낸메세지</a></p>
+  	<p><a href="${ctp}/wmMessage.wm?mSw=3&mFlag=11">보낸메세지</a></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=4">수신확인</a></p>
   	<p><a href="${ctp}/wmMessage.wm?mSw=5">휴지통</a></p>
   	<p><a href="javascript:wmDeleteAll()">휴지통비우기</a></p>
